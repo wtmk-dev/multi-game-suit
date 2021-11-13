@@ -1,0 +1,1572 @@
+fileFormatVersion: 2
+guid: b760fcbf55ae1ca4b84c9af9dd262a74
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7971410986548220256
+    second: deckSpriteSheet(10x)_0
+  - first:
+      213: -3271770603000448512
+    second: deckSpriteSheet(10x)_1
+  - first:
+      213: -8006962841846716174
+    second: deckSpriteSheet(10x)_2
+  - first:
+      213: -1461401616119502183
+    second: deckSpriteSheet(10x)_3
+  - first:
+      213: 4291474603818592671
+    second: deckSpriteSheet(10x)_4
+  - first:
+      213: -2221217126572491783
+    second: deckSpriteSheet(10x)_5
+  - first:
+      213: 1690554688734537210
+    second: deckSpriteSheet(10x)_6
+  - first:
+      213: 1379466054604088761
+    second: deckSpriteSheet(10x)_7
+  - first:
+      213: -5510542823879407890
+    second: deckSpriteSheet(10x)_8
+  - first:
+      213: -8182007423567604331
+    second: deckSpriteSheet(10x)_9
+  - first:
+      213: 6589015393797893358
+    second: deckSpriteSheet(10x)_10
+  - first:
+      213: 5912104441432221648
+    second: deckSpriteSheet(10x)_11
+  - first:
+      213: -2043919053256776103
+    second: deckSpriteSheet(10x)_12
+  - first:
+      213: 1502094423742990722
+    second: deckSpriteSheet(10x)_13
+  - first:
+      213: 4437957058674113931
+    second: deckSpriteSheet(10x)_14
+  - first:
+      213: 1490981747640848095
+    second: deckSpriteSheet(10x)_15
+  - first:
+      213: 3040437711265902815
+    second: deckSpriteSheet(10x)_16
+  - first:
+      213: -6797834956982559815
+    second: deckSpriteSheet(10x)_17
+  - first:
+      213: 996415097047808971
+    second: deckSpriteSheet(10x)_18
+  - first:
+      213: -7619464488421017875
+    second: deckSpriteSheet(10x)_19
+  - first:
+      213: 3637526040830897003
+    second: deckSpriteSheet(10x)_20
+  - first:
+      213: 2694506183462091773
+    second: deckSpriteSheet(10x)_21
+  - first:
+      213: 6576829577203233044
+    second: deckSpriteSheet(10x)_22
+  - first:
+      213: -4916496774720118407
+    second: deckSpriteSheet(10x)_23
+  - first:
+      213: 2220595576975072600
+    second: deckSpriteSheet(10x)_24
+  - first:
+      213: -4873000439260086328
+    second: deckSpriteSheet(10x)_25
+  - first:
+      213: 7920988354082957380
+    second: deckSpriteSheet(10x)_26
+  - first:
+      213: -569258778687209897
+    second: deckSpriteSheet(10x)_27
+  - first:
+      213: -7101010578536163949
+    second: deckSpriteSheet(10x)_28
+  - first:
+      213: -2772587806766581012
+    second: deckSpriteSheet(10x)_29
+  - first:
+      213: 7131296420946884866
+    second: deckSpriteSheet(10x)_30
+  - first:
+      213: 3728800669085331489
+    second: deckSpriteSheet(10x)_31
+  - first:
+      213: -2142597948087377162
+    second: deckSpriteSheet(10x)_32
+  - first:
+      213: 7120650943724692870
+    second: deckSpriteSheet(10x)_33
+  - first:
+      213: 8356694954652045867
+    second: deckSpriteSheet(10x)_34
+  - first:
+      213: -9143144191996373331
+    second: deckSpriteSheet(10x)_35
+  - first:
+      213: -6244261199134968738
+    second: deckSpriteSheet(10x)_36
+  - first:
+      213: -4344403476465900695
+    second: deckSpriteSheet(10x)_37
+  - first:
+      213: -2368436839740592292
+    second: deckSpriteSheet(10x)_38
+  - first:
+      213: 1126849932440437319
+    second: deckSpriteSheet(10x)_39
+  - first:
+      213: -4344250463267756884
+    second: deckSpriteSheet(10x)_40
+  - first:
+      213: -538233184625177385
+    second: deckSpriteSheet(10x)_41
+  - first:
+      213: 2357355563386815380
+    second: deckSpriteSheet(10x)_42
+  - first:
+      213: -4130211311601890035
+    second: deckSpriteSheet(10x)_43
+  - first:
+      213: 5691829934756444695
+    second: deckSpriteSheet(10x)_44
+  - first:
+      213: 7194998578020107504
+    second: deckSpriteSheet(10x)_45
+  - first:
+      213: -7590515213125798123
+    second: deckSpriteSheet(10x)_46
+  - first:
+      213: 5624394382476327936
+    second: deckSpriteSheet(10x)_47
+  - first:
+      213: -8947371220938381493
+    second: deckSpriteSheet(10x)_48
+  - first:
+      213: -4992334016877450500
+    second: deckSpriteSheet(10x)_49
+  - first:
+      213: 3019027222206878451
+    second: deckSpriteSheet(10x)_50
+  - first:
+      213: -9046700633739007550
+    second: deckSpriteSheet(10x)_51
+  - first:
+      213: -4750758656283194786
+    second: deckSpriteSheet(10x)_52
+  - first:
+      213: 4193820827430757710
+    second: deckSpriteSheet(10x)_53
+  - first:
+      213: 8320173435259175434
+    second: deckSpriteSheet(10x)_54
+  - first:
+      213: 2744836180773411203
+    second: deckSpriteSheet(10x)_55
+  - first:
+      213: -3030446994437937162
+    second: deckSpriteSheet(10x)_56
+  - first:
+      213: 3404956471030872210
+    second: deckSpriteSheet(10x)_57
+  - first:
+      213: -7544298162385824612
+    second: deckSpriteSheet(10x)_58
+  - first:
+      213: 228320536164234818
+    second: deckSpriteSheet(10x)_59
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1470
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0aea52c21fbdf5190800000000000000
+      internalID: -7971410986548220256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_1
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 1470
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00ab79d98f55892d0800000000000000
+      internalID: -3271770603000448512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_2
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 1470
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f869f1d7bd81e090800000000000000
+      internalID: -8006962841846716174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_3
+      rect:
+        serializedVersion: 2
+        x: 990
+        y: 1470
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99ae30519fe08bbe0800000000000000
+      internalID: -1461401616119502183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_4
+      rect:
+        serializedVersion: 2
+        x: 1320
+        y: 1470
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f99a73b3a616e8b30800000000000000
+      internalID: 4291474603818592671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_5
+      rect:
+        serializedVersion: 2
+        x: 1650
+        y: 1470
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9fbf1a9bac6ac21e0800000000000000
+      internalID: -2221217126572491783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_6
+      rect:
+        serializedVersion: 2
+        x: 1980
+        y: 1470
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af5a46f488e067710800000000000000
+      internalID: 1690554688734537210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_7
+      rect:
+        serializedVersion: 2
+        x: 2310
+        y: 1470
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b5e2646119d42310800000000000000
+      internalID: 1379466054604088761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_8
+      rect:
+        serializedVersion: 2
+        x: 2640
+        y: 1470
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee6071f6f7e9683b0800000000000000
+      internalID: -5510542823879407890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_9
+      rect:
+        serializedVersion: 2
+        x: 2970
+        y: 1470
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 595d4a0399ba37e80800000000000000
+      internalID: -8182007423567604331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_10
+      rect:
+        serializedVersion: 2
+        x: 3300
+        y: 1470
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eec67ee2792e07b50800000000000000
+      internalID: 6589015393797893358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_11
+      rect:
+        serializedVersion: 2
+        x: 3630
+        y: 1470
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d7a3927aa30c0250800000000000000
+      internalID: 5912104441432221648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_12
+      rect:
+        serializedVersion: 2
+        x: 3960
+        y: 1470
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9562af0437a82a3e0800000000000000
+      internalID: -2043919053256776103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_13
+      rect:
+        serializedVersion: 2
+        x: 4290
+        y: 1470
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 289cb428be288d410800000000000000
+      internalID: 1502094423742990722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_14
+      rect:
+        serializedVersion: 2
+        x: 4620
+        y: 1470
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8d35ba7e6ac69d30800000000000000
+      internalID: 4437957058674113931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 980
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fde49bafff701b410800000000000000
+      internalID: 1490981747640848095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_16
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 980
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd0b4bd4dfdc13a20800000000000000
+      internalID: 3040437711265902815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_17
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 980
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bb52538f1d39a1a0800000000000000
+      internalID: -6797834956982559815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_18
+      rect:
+        serializedVersion: 2
+        x: 990
+        y: 980
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcbfe54604af3dd00800000000000000
+      internalID: 996415097047808971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_19
+      rect:
+        serializedVersion: 2
+        x: 1320
+        y: 980
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de636fcda69324690800000000000000
+      internalID: -7619464488421017875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_20
+      rect:
+        serializedVersion: 2
+        x: 1650
+        y: 980
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6b65f469a61b7230800000000000000
+      internalID: 3637526040830897003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_21
+      rect:
+        serializedVersion: 2
+        x: 1980
+        y: 980
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfbf956091fc46520800000000000000
+      internalID: 2694506183462091773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_22
+      rect:
+        serializedVersion: 2
+        x: 2310
+        y: 980
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4113b79a7a7954b50800000000000000
+      internalID: 6576829577203233044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_23
+      rect:
+        serializedVersion: 2
+        x: 2640
+        y: 980
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 971247b6b3815cbb0800000000000000
+      internalID: -4916496774720118407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_24
+      rect:
+        serializedVersion: 2
+        x: 2970
+        y: 980
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85d176b79e321de10800000000000000
+      internalID: 2220595576975072600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_25
+      rect:
+        serializedVersion: 2
+        x: 3300
+        y: 980
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cf74933bef9f5cb0800000000000000
+      internalID: -4873000439260086328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_26
+      rect:
+        serializedVersion: 2
+        x: 3630
+        y: 980
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 448ee1bd0f00ded60800000000000000
+      internalID: 7920988354082957380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_27
+      rect:
+        serializedVersion: 2
+        x: 3960
+        y: 980
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75e731728269918f0800000000000000
+      internalID: -569258778687209897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_28
+      rect:
+        serializedVersion: 2
+        x: 4290
+        y: 980
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3959f086084247d90800000000000000
+      internalID: -7101010578536163949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_29
+      rect:
+        serializedVersion: 2
+        x: 4620
+        y: 980
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cea391d541ac589d0800000000000000
+      internalID: -2772587806766581012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 490
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 209bd86cf4477f260800000000000000
+      internalID: 7131296420946884866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_31
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 490
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 120f117d37c5fb330800000000000000
+      internalID: 3728800669085331489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_32
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 490
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f265c7a486f342e0800000000000000
+      internalID: -2142597948087377162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_33
+      rect:
+        serializedVersion: 2
+        x: 990
+        y: 490
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 685a2467e42a1d260800000000000000
+      internalID: 7120650943724692870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_34
+      rect:
+        serializedVersion: 2
+        x: 1320
+        y: 490
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b22955c19c1f8f370800000000000000
+      internalID: 8356694954652045867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_35
+      rect:
+        serializedVersion: 2
+        x: 1650
+        y: 490
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da651e1ccc60d1180800000000000000
+      internalID: -9143144191996373331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_36
+      rect:
+        serializedVersion: 2
+        x: 1980
+        y: 490
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e543eccd58de759a0800000000000000
+      internalID: -6244261199134968738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_37
+      rect:
+        serializedVersion: 2
+        x: 2310
+        y: 490
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96327484e0495b3c0800000000000000
+      internalID: -4344403476465900695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_38
+      rect:
+        serializedVersion: 2
+        x: 2640
+        y: 490
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5f20562e3f912fd0800000000000000
+      internalID: -2368436839740592292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_39
+      rect:
+        serializedVersion: 2
+        x: 2970
+        y: 490
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74209421b0063af00800000000000000
+      internalID: 1126849932440437319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_40
+      rect:
+        serializedVersion: 2
+        x: 3300
+        y: 490
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca46991783f16b3c0800000000000000
+      internalID: -4344250463267756884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_41
+      rect:
+        serializedVersion: 2
+        x: 3630
+        y: 490
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7dcc61035cfc788f0800000000000000
+      internalID: -538233184625177385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_42
+      rect:
+        serializedVersion: 2
+        x: 3960
+        y: 490
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49346f4256207b020800000000000000
+      internalID: 2357355563386815380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_43
+      rect:
+        serializedVersion: 2
+        x: 4290
+        y: 490
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0d4ba4e1ba8ea6c0800000000000000
+      internalID: -4130211311601890035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_44
+      rect:
+        serializedVersion: 2
+        x: 4620
+        y: 490
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71ab7174b217dfe40800000000000000
+      internalID: 5691829934756444695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_45
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f444520615c9d360800000000000000
+      internalID: 7194998578020107504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_46
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 0
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 517307341a219a690800000000000000
+      internalID: -7590515213125798123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_47
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 0
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00c343c34ecdd0e40800000000000000
+      internalID: 5624394382476327936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_48
+      rect:
+        serializedVersion: 2
+        x: 990
+        y: 0
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b472a6e974d84d380800000000000000
+      internalID: -8947371220938381493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_49
+      rect:
+        serializedVersion: 2
+        x: 1320
+        y: 0
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfaabe389aaa7bab0800000000000000
+      internalID: -4992334016877450500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_50
+      rect:
+        serializedVersion: 2
+        x: 1650
+        y: 0
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f210ea534db5e920800000000000000
+      internalID: 3019027222206878451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_51
+      rect:
+        serializedVersion: 2
+        x: 1980
+        y: 0
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c96fa084b9a37280800000000000000
+      internalID: -9046700633739007550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_52
+      rect:
+        serializedVersion: 2
+        x: 2310
+        y: 0
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5ac0a63c2ae11eb0800000000000000
+      internalID: -4750758656283194786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_53
+      rect:
+        serializedVersion: 2
+        x: 2640
+        y: 0
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4525ae92d1733a30800000000000000
+      internalID: 4193820827430757710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_54
+      rect:
+        serializedVersion: 2
+        x: 2970
+        y: 0
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a02c34e38a1377370800000000000000
+      internalID: 8320173435259175434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_55
+      rect:
+        serializedVersion: 2
+        x: 3300
+        y: 0
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38993a1b6fd971620800000000000000
+      internalID: 2744836180773411203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_56
+      rect:
+        serializedVersion: 2
+        x: 3630
+        y: 0
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f760e9b380b1f5d0800000000000000
+      internalID: -3030446994437937162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_57
+      rect:
+        serializedVersion: 2
+        x: 3960
+        y: 0
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2987673ced5d04f20800000000000000
+      internalID: 3404956471030872210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_58
+      rect:
+        serializedVersion: 2
+        x: 4290
+        y: 0
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c945c5feac44d4790800000000000000
+      internalID: -7544298162385824612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deckSpriteSheet(10x)_59
+      rect:
+        serializedVersion: 2
+        x: 4620
+        y: 0
+        width: 330
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 246fef461582b2300800000000000000
+      internalID: 228320536164234818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: a725faa519a63bc409a6d729e26d45de
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
