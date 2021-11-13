@@ -14,6 +14,8 @@ public class RMG_Main : MonoBehaviour
     private HelpScreenView _HelpScreenView;
     [SerializeField]
     private CreditsScreenView _CreditScreenView;
+    [SerializeField]
+    private PokerDeckDefinition _DeckDefinition;
 
     // Game screens
     private RMG_StartScreen _StartScreen;
