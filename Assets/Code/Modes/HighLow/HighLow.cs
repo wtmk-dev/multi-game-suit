@@ -90,23 +90,27 @@ public class HighLow : State
             _StateData.IdelStateTimer.OnTimerComplete -= Idle_ShowOverlayText;
             _View.OverlayText.SetActive(true);
             _View.SetOverlayText("Welcome to High / Low \n Please place your bets!");
+            _StateData.IdelStateTimer.Start(_StateData.IdelShowOverlayTime);
         }
-
-        _StateData.IdelStateTimer.Start(_StateData.IdelShowOverlayTime);
+        else
+        {
+            _StateData.IdelStateTimer.OnTimerComplete -= Idle_HideOverlayText;
+        }
     }
 
     private void Deal_Enter()
     {
-        UnregisterOnSelectedBets();        
+               
         DealCards();
 
         _View.OverlayText.SetActive(true);
         _View.SetOverlayText("Hey! Beautiful person,\n Do you think the face up card is HIGHER or LOWER than the face down card?");
 
-        _StateData.DealStateTimer.OnTimerComplete += Deal_MessageHide;
-        _StateData.DealStateTimer.Start(_StateData.DealShowOverlayTime);
         RegisterHigh();
         RegisterLow();
+
+        _StateData.DealStateTimer.OnTimerComplete += Deal_MessageHide;
+        _StateData.DealStateTimer.Start(_StateData.DealShowOverlayTime);
         //wait for player to take action
     }
 
@@ -119,12 +123,15 @@ public class HighLow : State
 
     private void BetSelected(BetEventArgs bet)
     {
+        UnregisterOnSelectedBets();
+
         if(_GameData.PlaceBet(bet.Bet))
         {
             StateChange(HighLowState.Deal);
         }
         else
         {
+            RegisterOnSelectedBets();
             _Debug.Log("Need more moneyssss");
             StateChange(HighLowState.Idle);
         }
@@ -171,13 +178,13 @@ public class HighLow : State
 
     private void Reveal_Enter()
     {
-        if(_StateData.Left.State == PokerCardState.FaceDown)
+        if (_StateData.Base == _StateData.Left)
         {
-            SetCardState(_StateData.Left, PokerCardState.FaceUp);
+            _StateData.Right.SetState(PokerCardState.FaceUp);
         }
-        else if (_StateData.Right.State == PokerCardState.FaceDown)
+        else if (_StateData.Base == _StateData.Right)
         {
-            SetCardState(_StateData.Right, PokerCardState.FaceUp);
+            _StateData.Left.SetState(PokerCardState.FaceUp);
         }
 
         _StateData.RevealStateTimer.OnTimerComplete += Reveal_Complete;
@@ -192,16 +199,12 @@ public class HighLow : State
 
     private void Outcome_Enter()
     {
-        ResolveWinner();
-        
         _Debug.Log($"{_StateData.Selection}");
-        _Debug.Log($"{_StateData.IsWinner}");
-        _Debug.Log($"Base Card : {_StateData.Base.Model.Suit.ToString()} - {_StateData.Base.Model.Rank.ToString()}");
-        _Debug.Log($"High Card : {GetHighCard().Model.Suit.ToString()} - {GetHighCard().Model.Rank.ToString()}");
-        _Debug.Log($"Left Card : {_StateData.Left.Model.Suit.ToString()} - {_StateData.Left.Model.Rank.ToString()}");
-        _Debug.Log($"Right Card : {_StateData.Right.Model.Suit.ToString()} - {_StateData.Right.Model.Rank.ToString()}");
 
-        TransitionOutcome();
+        ResolveWinner();
+        StateChange(HighLowState.Celebrate);
+
+        _Debug.Log($"{_StateData.IsWinner}");
     }
 
     private void Celebrate_Enter()
@@ -219,14 +222,10 @@ public class HighLow : State
         {
             _StateData.WinStreak = 0;
             SetOverlayText($"You can't win them all.\n\nRun it back?");
-            SetCardState(_StateData.Left, PokerCardState.FaceDown);
-            SetCardState(_StateData.Right, PokerCardState.FaceDown);
-
-            _StateData.Left = null;
-            _StateData.Right = null;
+            SetCardState(_StateData.Base, PokerCardState.FaceDown);
+            
             _StateData.Base = null;
-
-            _Deck.InitDeckFromCards();
+            _StateData.ShuffleDeck();
         }    
 
         _StateData.CelebrateStateTimer.OnTimerComplete += Celebrate_Complete;
@@ -235,6 +234,7 @@ public class HighLow : State
 
     private void Celebrate_Complete()
     {
+        _StateData.CelebrateStateTimer.OnTimerComplete -= Celebrate_Complete;
         HideOverlayText();
         StateChange(HighLowState.Idle);
     }
@@ -302,21 +302,36 @@ public class HighLow : State
 
     private void DealCards()
     {
-        if (_StateData.Right == null)
+        if (_StateData.Base == null)
         {
             _StateData.Right = (PokerCard)_StateData.Deck.Draw();
             SetCardView(_StateData.Right, _View.Right);
-            SetCardState(_StateData.Right,PokerCardState.FaceDown);
-        }
+            SetCardState(_StateData.Right, PokerCardState.FaceDown);
 
-        if (_StateData.Left == null)
+            _StateData.Left = (PokerCard)_StateData.Deck.Draw();
+            SetCardView(_StateData.Left, _View.Left);
+            SetCardState(_StateData.Left, PokerCardState.FaceDown);
+
+            _StateData.Base = _StateData.Left;
+        }
+        else if (_StateData.Base == _StateData.Left)
         {
             _StateData.Left = (PokerCard)_StateData.Deck.Draw();
             SetCardView(_StateData.Left, _View.Left);
             SetCardState(_StateData.Left, PokerCardState.FaceDown);
+            _StateData.Base = _StateData.Right;
+        }
+        else if (_StateData.Base == _StateData.Right)
+        {
+            _StateData.Right = (PokerCard)_StateData.Deck.Draw();
+            SetCardView(_StateData.Right, _View.Right);
+            SetCardState(_StateData.Right, PokerCardState.FaceDown);
+            _StateData.Base = _StateData.Left;
         }
 
-        SetBaseCard();
+        SetCardState(_StateData.Left, PokerCardState.FaceDown);
+        SetCardState(_StateData.Right, PokerCardState.FaceDown);
+
         SetCardState(_StateData.Base, PokerCardState.FaceUp);
     }
 
@@ -330,26 +345,7 @@ public class HighLow : State
         card.SetState(state);
     }
 
-    private void SetBaseCard()
-    {
-        if(_StateData.Base == null)
-        {
-            _StateData.Base = _StateData.Left;
-            SetCardState(_StateData.Base, PokerCardState.FaceUp);
-        }
-        else
-        {
-            if(_StateData.Base == _StateData.Left)
-            {
-                _StateData.Base = _StateData.Right;
-            }
-            else if(_StateData.Base == _StateData.Right)
-            {
-                _StateData.Base = _StateData.Left;
-            }
-        }
-    }
-
+   
     private PokerCard GetHighCard()
     {
         if (_StateData.Left.Model.Rank == _StateData.Right.Model.Rank)
@@ -374,48 +370,23 @@ public class HighLow : State
 
     private void ResolveWinner()
     {
-        PokerCard card = GetHighCard();
+        PokerCard highCard = GetHighCard();
+        _StateData.IsWinner = false;
+
         if (_StateData.Selection == HighLowSelection.High)
         {
-            if (card.Model.Rank == _StateData.Base.Model.Rank && card.Model.Suit == _StateData.Base.Model.Suit)
+            if(highCard == _StateData.Base)
             {
                 _StateData.IsWinner = true;
-            }
-            else
-            {
-                _StateData.IsWinner = false;
             }
         }
         else if (_StateData.Selection == HighLowSelection.Low)
         {
-            if (card.Model.Rank != _StateData.Base.Model.Rank && card.Model.Suit != _StateData.Base.Model.Suit)
+            if(highCard != _StateData.Base)
             {
                 _StateData.IsWinner = true;
             }
-            else
-            {
-                _StateData.IsWinner = false;
-            }
         }
-    }
-    /*
-    private void SwapBaseCard()
-    {
-        if(_StateData.Left == _StateData.Base)
-        {
-            _StateData.Base = _StateData.Right;
-        }else if(_StateData.Right == _StateData.Base)
-        {
-            _StateData.Base = _StateData.Left;
-        }
-
-        //SetCardState(_StateData.Base, PokerCardState.FaceDown);
-    }
-    */
-
-    private void TransitionOutcome()
-    {
-        StateChange(HighLowState.Celebrate);
     }
 
     private void SetOverlayText(string text)
@@ -469,8 +440,7 @@ public class HighLowStateData : Updatable
     public readonly float CelebrateShowOverlayTime = 3600f;
 
     public PokerDeck Deck { get { return _Deck; } }
-    public PokerCard Left, Right;
-    public PokerCard Base;
+    public PokerCard Left, Right, Base = null;
 
     public int WinStreak;
 
@@ -481,6 +451,11 @@ public class HighLowStateData : Updatable
         PickStateTimer.Tick();
         RevealStateTimer.Tick();
         CelebrateStateTimer.Tick();
+    }
+
+    public void ShuffleDeck()
+    {
+        _Deck.InitDeckFromCards();
     }
 
     private PokerDeck _Deck;
