@@ -10,7 +10,6 @@ public class RMG_GameScreen : State
     {
         _View.SetActive(true);
         StartGameMode();
-        //_View.SetCanvasAsParent(ExtractRectsFromDeck());
     }
 
     public override bool OnUpdate()
@@ -49,7 +48,7 @@ public class RMG_GameScreen : State
 
     private IState[] BuildModes()
     {
-        _HighLow = new HighLow(_View.HighLow);
+        _HighLow = new HighLow(_View.HighLow, _Deck);
         _Blackjack = new Blackjack(_View.Blackjack);
         _FiveCard = new Poker(_View.Poker, _GameModes.Poker5);
         _SevenCard = new Poker(_View.Poker, _GameModes.Poker7);
@@ -69,7 +68,6 @@ public class RMG_GameScreen : State
         var transforms = new List<RectTransform>();
         for (int i = 0; i < _Deck.Cards.Count; i++)
         {
-            _Deck.Cards[i].Init();
             transforms.Add(_Deck.Cards[i].View.RectTransform);
         }
         return transforms;

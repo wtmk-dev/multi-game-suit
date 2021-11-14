@@ -22,19 +22,19 @@ public class RMG_GameData
 
     public bool PlaceBet(int bet)
     {
-        if(bet < _Money)
+        if(bet > _Money)
         {
             return false;
         }
         else
         {
             _Money -= bet;
-            return false;
+            return true;
         }
     }
 
     private string _CurrentGameMode;
     private int _Money;
 
-    public RMG_GameData() { }
+    public RMG_GameData() { _Money = 9999999; }
 }
