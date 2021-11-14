@@ -2494,16 +2494,68 @@ MonoBehaviour:
   _HelpScreenView: {fileID: 32410298}
   _CreditScreenView: {fileID: 409025149}
   _DeckDefinition:
-    _Spades: []
-    _Hearts: []
-    _Clubs: []
-    _Diamonds: []
-    _Joker: {fileID: 0}
-    _Back: {fileID: 0}
-    _Platinum: {fileID: 0}
-    JokerCount: 0
+    Spades:
+    - {fileID: 3728800669085331489, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: -2142597948087377162, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: 7120650943724692870, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: 8356694954652045867, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: -9143144191996373331, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: -6244261199134968738, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: -4344403476465900695, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: -2368436839740592292, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: 1126849932440437319, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: -4344250463267756884, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: -538233184625177385, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: 2357355563386815380, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: -4130211311601890035, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    Hearts:
+    - {fileID: -3271770603000448512, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: -8006962841846716174, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: -1461401616119502183, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: 4291474603818592671, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: -2221217126572491783, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: 1690554688734537210, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: 1379466054604088761, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: -5510542823879407890, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: -8182007423567604331, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: 6589015393797893358, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: 5912104441432221648, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: -2043919053256776103, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: 1502094423742990722, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    Clubs:
+    - {fileID: 3040437711265902815, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: -6797834956982559815, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: 996415097047808971, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: -7619464488421017875, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: 3637526040830897003, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: 2694506183462091773, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: 6576829577203233044, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: -4916496774720118407, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: 2220595576975072600, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: -4873000439260086328, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: 7920988354082957380, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: -569258778687209897, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: -7101010578536163949, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    Diamonds:
+    - {fileID: -7590515213125798123, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: 5624394382476327936, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: -8947371220938381493, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: -4992334016877450500, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: 3019027222206878451, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: -9046700633739007550, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: -4750758656283194786, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: 4193820827430757710, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: 8320173435259175434, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: 2744836180773411203, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: -3030446994437937162, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: 3404956471030872210, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    - {fileID: -7544298162385824612, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    Joker: {fileID: -2772587806766581012, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    Back: {fileID: 7131296420946884866, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    Platinum: {fileID: 4437957058674113931, guid: b760fcbf55ae1ca4b84c9af9dd262a74, type: 3}
+    JokerCount: 2
     StanderedDeckSize: 52
-    CardsPerSuit: 0
+    CardsPerSuit: 13
 --- !u!1 &2069518165
 GameObject:
   m_ObjectHideFlags: 0

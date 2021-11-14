@@ -27,8 +27,11 @@ public class RMG_Main : MonoBehaviour
     private GameScreenTags _ScreenStates = new GameScreenTags();
     private Dood _Dood = Dood.Instance;
 
+    private PokerModelFactory _PokerModelFactory;
+
     private void Awake()
     {
+        BuildModels();
         InitGameScreens(BuildGameScreens());
     }
 
@@ -68,6 +71,13 @@ public class RMG_Main : MonoBehaviour
         }
 
         _GameScreenDirector = new StateDirector(gameStates);
+    }
+
+    private void BuildModels()
+    {
+        _PokerModelFactory = new PokerModelFactory();
+        List<PokerCardModel> cards = _PokerModelFactory.Build_DeckFromDefinition(_DeckDefinition);
+        Debug.Log(cards.Count);
     }
 
     private void GameStart()
