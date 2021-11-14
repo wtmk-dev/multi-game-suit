@@ -14,12 +14,14 @@ public class RMG_StartScreen : State
 
     public override void OnExit()
     {
+        _Ready = false;
         Unregister();
         _View.SetActive(false);
     }
 
     private GameScreenTags _ScreenTags = new GameScreenTags();
-    private GameData _GameData = GameData.Instance;
+    private GameModeTag _GameMode = new GameModeTag(); 
+    private RMG_GameData _GameData = RMG_GameData.Instance;
     private RMG_StartScreenView _View;
     private Dood _Debug = Dood.Instance;
 
@@ -48,20 +50,34 @@ public class RMG_StartScreen : State
     private void HighLowSelected() 
     {
         _Debug.Log("HighLowSelected");
+        _GameData.SetGameMode(_GameMode.HighLow);
+        StateChange();
     }
 
     private void BlackjackSelected() 
     {
         _Debug.Log("BlackjackSelected");
+        _GameData.SetGameMode(_GameMode.Blackjack);
+        StateChange();
     }
 
     private void FiveCardSelected() 
     {
         _Debug.Log("FiveCardSelected");
+        _GameData.SetGameMode(_GameMode.Poker5);
+        StateChange();
     }
 
     private void SevenCardSelected() 
     {
         _Debug.Log("SevenCardSelected");
+        _GameData.SetGameMode(_GameMode.Poker7);
+        StateChange();
+    }
+
+    private void StateChange()
+    {
+        NextState = _ScreenTags.Game;
+        _Ready = true;
     }
 }
