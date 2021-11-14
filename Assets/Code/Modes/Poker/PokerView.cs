@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
-public interface IDeck
+public class PokerView : StateView
 {
-    public List<ICard> Cards { get; }
+
 }

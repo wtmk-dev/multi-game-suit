@@ -16,6 +16,8 @@ public class RMG_Main : MonoBehaviour
     private CreditsScreenView _CreditScreenView;
     [SerializeField]
     private PokerDeckDefinition _DeckDefinition;
+    [SerializeField]
+    private PokerDeckFactory _DeckFactory;
 
     // Game screens
     private RMG_StartScreen _StartScreen;
@@ -26,12 +28,11 @@ public class RMG_Main : MonoBehaviour
     private StateDirector _GameScreenDirector;
     private GameScreenTags _ScreenStates = new GameScreenTags();
     private Dood _Dood = Dood.Instance;
-
-    private PokerModelFactory _PokerModelFactory;
+    private PokerDeck _Deck;
 
     private void Awake()
     {
-        BuildModels();
+        _Deck = _DeckFactory.Build_DeckFromDefinition(_DeckDefinition);
         InitGameScreens(BuildGameScreens());
     }
 
@@ -49,7 +50,7 @@ public class RMG_Main : MonoBehaviour
     private IState[] BuildGameScreens()
     {
         _StartScreen = new RMG_StartScreen(_StartScreenView);
-        _GameScreen = new RMG_GameScreen(_GameScreenView);
+        _GameScreen = new RMG_GameScreen(_GameScreenView, _Deck);
         _HelpScreen = new HelpScreen(_HelpScreenView);
         _CreditsScreen = new CreditsScreen(_CreditScreenView);
 
@@ -71,13 +72,6 @@ public class RMG_Main : MonoBehaviour
         }
 
         _GameScreenDirector = new StateDirector(gameStates);
-    }
-
-    private void BuildModels()
-    {
-        _PokerModelFactory = new PokerModelFactory();
-        List<PokerCardModel> cards = _PokerModelFactory.Build_DeckFromDefinition(_DeckDefinition);
-        Debug.Log(cards.Count);
     }
 
     private void GameStart()

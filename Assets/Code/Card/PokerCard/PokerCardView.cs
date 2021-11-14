@@ -3,13 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PokerCardView : MonoBehaviour
+[RequireComponent(typeof(Image), typeof(RectTransform))]
+public class PokerCardView : MonoBehaviour, ICardView
 {
-    [SerializeField]
-    private Image Image;
+    public RectTransform RectTransform { get { return _RectTransform; } }
 
     public void Skin(Sprite sprite)
     {
-        Image.sprite = sprite;
+        _Image.sprite = sprite;
+    }
+
+    private Image _Image;
+    private RectTransform _RectTransform;
+
+    void Awake()
+    {
+        _Image = GetComponent<Image>();
+        _RectTransform = GetComponent<RectTransform>();
     }
 }

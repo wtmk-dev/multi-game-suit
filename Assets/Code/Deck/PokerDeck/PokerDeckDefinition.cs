@@ -11,6 +11,7 @@ public class PokerDeckDefinition
     public List<Sprite> Clubs;
     public List<Sprite> Diamonds;
     public Sprite Joker, Back, Platinum;
+    public GameObject PokerCardPrefab;
 
     public int JokerCount = 2;
     public int StanderedDeckSize = 52;
