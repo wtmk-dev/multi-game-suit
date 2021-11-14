@@ -10,6 +10,7 @@ public class PokerCardView : MonoBehaviour, ICardView
 
     public void Skin(Sprite sprite)
     {
+        gameObject.SetActive(true);
         _Image.sprite = sprite;
     }
 
