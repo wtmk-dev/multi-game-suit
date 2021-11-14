@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RMG_GameScreenView : StateView
+public partial class RMG_GameScreenView : StateView
 {
     public PokerView Poker;
     public BlackjackView Blackjack;
@@ -15,8 +15,7 @@ public class RMG_GameScreenView : StateView
     {
         for (int i = 0; i < transforms.Count; i++)
         {
-            transforms[i].SetParent(_UI.transform);
-            transforms[i].position = Vector3.zero;
+            transforms[i].SetParent(transform);
         }
     }
 }

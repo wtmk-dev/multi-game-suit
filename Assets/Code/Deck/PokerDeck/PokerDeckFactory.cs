@@ -20,7 +20,6 @@ public class PokerDeckFactory : MonoBehaviour
             GameObject clone = Instantiate(deckDefinition.PokerCardPrefab);
             PokerCardView view = clone.GetComponent<PokerCardView>();
             PokerCard card = new PokerCard(view, models[i]);
-            cards.Add(card);
         }
         return cards;
     }

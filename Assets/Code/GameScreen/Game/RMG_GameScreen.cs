@@ -9,18 +9,11 @@ public class RMG_GameScreen : State
     public override void OnEnter()
     {
         _View.SetActive(true);
-        StartGameMode();
-        //_View.SetCanvasAsParent(ExtractRectsFromDeck());
-    }
-
-    public override bool OnUpdate()
-    {
-        _ModeDirector.OnUpdate();
-        return _Ready;
+        _View.SetCanvasAsParent(ExtractRectsFromDeck());
     }
 
     private GameScreenTags _ScreenTags = new GameScreenTags();
-    private RMG_GameData _GameData = RMG_GameData.Instance;
+    private GameData _GameData = GameData.Instance;
     private RMG_GameScreenView _View;
     private PokerDeck _Deck;
 
@@ -30,7 +23,6 @@ public class RMG_GameScreen : State
 
     private StateDirector _ModeDirector;
     private IState[] _Modes = new IState[4]; //High Low , Blackjack, Poker 5, Poker 7
-    private GameModeTag _GameModes = new GameModeTag();
 
     public RMG_GameScreen(RMG_GameScreenView view, PokerDeck deck)
     {
@@ -41,18 +33,12 @@ public class RMG_GameScreen : State
         InitModes(BuildModes());
     }
 
-    private void StartGameMode()
-    {
-        _ModeDirector.SetCurrentState(_GameData.CurrentGameMode);
-        _ModeDirector.IsActive = true;
-    }
-
     private IState[] BuildModes()
     {
         _HighLow = new HighLow(_View.HighLow);
         _Blackjack = new Blackjack(_View.Blackjack);
-        _FiveCard = new Poker(_View.Poker, _GameModes.Poker5);
-        _SevenCard = new Poker(_View.Poker, _GameModes.Poker7);
+        _FiveCard = new Poker(_View.Poker);
+        _SevenCard = new Poker(_View.Poker);
 
         IState[] gameStates = new IState[] { _HighLow, _Blackjack, _FiveCard, _SevenCard };
 
