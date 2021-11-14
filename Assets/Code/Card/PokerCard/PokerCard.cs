@@ -23,6 +23,7 @@ public class PokerCard : ICard
 
         _StateProcess.RegisterEnter(PokerCardState.FaceUp.ToString(), FaceUp_Enter);
         _StateProcess.RegisterEnter(PokerCardState.FaceDown.ToString(), FaceDown_Enter);
+        _State = PokerCardState.FaceDown;
     }
 
     private void FaceUp_Enter()

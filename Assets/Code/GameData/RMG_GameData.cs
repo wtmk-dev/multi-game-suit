@@ -14,10 +14,18 @@ public class RMG_GameData
     }
 
     public string CurrentGameMode { get { return _CurrentGameMode; } set { _CurrentGameMode = value; } }
+    public int CurrentBet { get { return _CurrentBet; } set { _CurrentBet = value; } }
+
 
     public void SetGameMode(string mode)
     {
         _CurrentGameMode = mode;
+    }
+
+    public void AddWinnings(int totalWin)
+    {
+        _Money += _CurrentBet + totalWin;
+        _CurrentBet = 0;
     }
 
     public bool PlaceBet(int bet)
@@ -28,6 +36,7 @@ public class RMG_GameData
         }
         else
         {
+            _CurrentBet = bet;
             _Money -= bet;
             return true;
         }
@@ -35,6 +44,10 @@ public class RMG_GameData
 
     private string _CurrentGameMode;
     private int _Money;
-
-    public RMG_GameData() { _Money = 9999999; }
+    private int _CurrentBet;
+    public RMG_GameData() 
+    { 
+        _Money = 9999999;
+        _CurrentBet = 0;
+    }
 }
