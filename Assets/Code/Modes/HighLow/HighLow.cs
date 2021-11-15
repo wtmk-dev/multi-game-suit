@@ -68,40 +68,6 @@ public class HighLow : State
 
         _View.OverlayText.SetActive(true);
         _View.SetOverlayText(_StateData.IdelStateText);
-        _StateData.IdelStateTimer.OnTimerComplete += Idle_HideOverlayText;
-        _StateData.IdelStateTimer.Start(_StateData.IdelShowOverlayTime);
-    }
-
-    private void Idle_HideOverlayText()
-    {
-        _StateData.IdelStateTimer.OnTimerComplete -= Idle_HideOverlayText;
-
-        if (_State == HighLowState.Deal)
-        {
-            return;
-        }
-
-        _StateData.IdelStateTimer.OnTimerComplete += Idle_ShowOverlayText;
-        _View.OverlayText.SetActive(false);
-        _View.SetOverlayText("");
-
-        _StateData.IdelStateTimer.Start(_StateData.IdelShowOverlayTime);
-    }
-
-    private void Idle_ShowOverlayText()
-    {
-        if (_State == HighLowState.Idle)
-        {
-            _StateData.IdelStateTimer.OnTimerComplete += Idle_HideOverlayText;
-            _StateData.IdelStateTimer.OnTimerComplete -= Idle_ShowOverlayText;
-            _View.OverlayText.SetActive(true);
-            _View.SetOverlayText(_StateData.IdelStateText);
-            _StateData.IdelStateTimer.Start(_StateData.IdelShowOverlayTime);
-        }
-        else
-        {
-            _StateData.IdelStateTimer.OnTimerComplete -= Idle_HideOverlayText;
-        }
     }
 
     private void Deal_Enter()
@@ -109,7 +75,7 @@ public class HighLow : State
         DealCards();
 
         _View.OverlayText.SetActive(true);
-        _View.SetOverlayText("Is the FACE UP card \n HIGHER or LOWER \n than the FACE DOWN card?");
+        _View.SetOverlayText(_StateData.Deal_EnterText);
 
         RegisterHigh();
         RegisterLow();
@@ -136,7 +102,6 @@ public class HighLow : State
         else
         {
             RegisterOnSelectedBets();
-            _Debug.Log("Need more moneyssss");
             StateChange(HighLowState.Idle);
         }
     }
@@ -147,9 +112,10 @@ public class HighLow : State
         UnregisterLow();
 
         _View.OverlayText.SetActive(true);
-        _View.SetOverlayText("{horiexp}...LOWER!?{/horiexp}");
-
-        StateChange(HighLowState.Pick);
+       
+        _StateData.PickStateTimer.OnTimerComplete += Pick_Complete;
+        _StateData.PickStateTimer.Start(_StateData.PickShowOverlayTime);
+        _View.SetOverlayText(_StateData.OnSlectedText);
     }
 
     private void OnHighSelected()
@@ -159,15 +125,10 @@ public class HighLow : State
         UnregisterLow();
 
         _View.OverlayText.SetActive(true);
-        _View.SetOverlayText("{horiexp}..HIGHER!?{/horiexp}");
-
-        StateChange(HighLowState.Pick);
-    }
-
-    private void Pick_Enter()
-    {
+       
         _StateData.PickStateTimer.OnTimerComplete += Pick_Complete;
         _StateData.PickStateTimer.Start(_StateData.PickShowOverlayTime);
+        _View.SetOverlayText(_StateData.OnSlectedText);
     }
 
     private void Pick_Complete()
@@ -177,6 +138,11 @@ public class HighLow : State
         _View.SetOverlayText("");
         _View.OverlayText.SetActive(false);
 
+        StateChange(HighLowState.Pick);
+    }
+
+    private void Pick_Enter()
+    {
         StateChange(HighLowState.Reveal);
     }
 
@@ -217,7 +183,7 @@ public class HighLow : State
         {
             _StateData.WinStreak++;
             int totalWin = _GameData.CurrentBet * _StateData.WinStreak;
-            SetOverlayText($"<wiggle>Beautiful!</wiggle>\n<incr>WIN STREAK {_StateData.WinStreak}<incr>\nTOTAL WIN ${totalWin}");
+            SetOverlayText(_StateData.GetCelebrationText(_StateData.WinStreak, totalWin));
             _GameData.AddWinnings(totalWin);
 
             SetCardState(_StateData.Base, PokerCardState.FaceDown);
@@ -225,7 +191,7 @@ public class HighLow : State
         else
         {
             _StateData.WinStreak = 0;
-            SetOverlayText($"<bounce>QQ--\nBetter luck next time.</bounce>");
+            SetOverlayText(_StateData.Celebrate_EnterText);
             SetCardState(_StateData.Base, PokerCardState.FaceDown);
             
             _StateData.Base = null;
@@ -239,7 +205,7 @@ public class HighLow : State
     private void Celebrate_Complete()
     {
         _StateData.CelebrateStateTimer.OnTimerComplete -= Celebrate_Complete;
-        HideOverlayText();
+        //HideOverlayText();
         StateChange(HighLowState.Idle);
     }
 
@@ -421,59 +387,4 @@ public enum HighLowState
 public enum HighLowSelection
 {
     High, Low
-}
-
-public class HighLowStateData : Updatable
-{
-    public bool IsWinner;
-    public HighLowSelection Selection;
-
-    public Timer IdelStateTimer;
-    public readonly float IdelShowOverlayTime = 7600f;
-
-    public Timer DealStateTimer;
-    public readonly float DealShowOverlayTime = 9300f;
-
-    public Timer PickStateTimer;
-    public readonly float PickShowOverlayTime = 6700f;
-
-    public Timer RevealStateTimer;
-    public readonly float RevealShowOverlayTime = 2400f;
-
-    public Timer CelebrateStateTimer;
-    public readonly float CelebrateShowOverlayTime = 7300f;
-
-    public PokerDeck Deck { get { return _Deck; } }
-    public PokerCard Left, Right, Base = null;
-
-    public int WinStreak;
-
-    public readonly string IdelStateText = "{vertexp}Hello Welcome\nThis is High Low \n Please place your bet!{/vertexp}";
-
-    public void Update()
-    {
-        IdelStateTimer.Tick();
-        DealStateTimer.Tick();
-        PickStateTimer.Tick();
-        RevealStateTimer.Tick();
-        CelebrateStateTimer.Tick();
-    }
-
-    public void ShuffleDeck()
-    {
-        _Deck.InitDeckFromCards();
-    }
-
-    private PokerDeck _Deck;
-    public HighLowStateData(PokerDeck deck)
-    {
-        _Deck = deck;
-        _Deck.InitDeckFromCards();
-        IdelStateTimer = new Timer(0f);
-        DealStateTimer = new Timer(0f);
-        PickStateTimer = new Timer(0f);
-        RevealStateTimer = new Timer(0f);
-        CelebrateStateTimer = new Timer(0f);
-        WinStreak = 0;
-    }
 }
