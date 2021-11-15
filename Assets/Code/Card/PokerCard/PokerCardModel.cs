@@ -4,16 +4,20 @@ using UnityEngine;
 [Serializable]
 public class PokerCardModel
 {
-    public Sprite Sprite { get { return _Sprite; } private set { _Sprite = value; } }
+    public Sprite Front { get { return _Front; } private set { _Front = value; } }
+    public Sprite Back { get { return _Back; } private set { _Back = value; } }
     public PokerCardRank Rank { get { return _Rank; } private set { _Rank = value; } }
     public PokerCardSuit Suit { get { return _Suit; } private set { _Suit = value; } }
 
-    private Sprite _Sprite;
+    private Sprite _Front, _Back;
     private PokerCardRank _Rank;
     private PokerCardSuit _Suit;
 
-    public PokerCardModel(Sprite sprite, PokerCardRank rank, PokerCardSuit suit)
+    public PokerCardModel(Sprite front, Sprite back, PokerCardRank rank, PokerCardSuit suit)
     {
-        Sprite = sprite;
+        Front = front;
+        Back = back;
+        _Rank = rank;
+        _Suit = suit;
     }
 }

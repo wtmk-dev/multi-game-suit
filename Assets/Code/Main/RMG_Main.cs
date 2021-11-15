@@ -16,15 +16,14 @@ public class RMG_Main : MonoBehaviour
     private CreditsScreenView _CreditScreenView;
     [SerializeField]
     private PokerDeckDefinition _DeckDefinition;
-    [SerializeField]
-    private PokerDeckFactory _DeckFactory;
-
+ 
     // Game screens
     private RMG_StartScreen _StartScreen;
     private RMG_GameScreen _GameScreen;
     private HelpScreen _HelpScreen;
     private CreditsScreen _CreditsScreen;
 
+    private PokerDeckFactory _DeckFactory = new PokerDeckFactory();
     private StateDirector _GameScreenDirector;
     private GameScreenTags _ScreenStates = new GameScreenTags();
     private Dood _Dood = Dood.Instance;

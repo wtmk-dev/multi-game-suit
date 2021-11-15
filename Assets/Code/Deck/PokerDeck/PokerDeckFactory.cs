@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class PokerDeckFactory : MonoBehaviour
+public class PokerDeckFactory
 {
     public PokerDeck Build_DeckFromDefinition(PokerDeckDefinition deckDefinition)
     {
@@ -17,9 +16,8 @@ public class PokerDeckFactory : MonoBehaviour
         var cards = new List<ICard>();
         for (int i = 0; i < models.Count; i++)
         {
-            GameObject clone = Instantiate(deckDefinition.PokerCardPrefab);
-            PokerCardView view = clone.GetComponent<PokerCardView>();
-            PokerCard card = new PokerCard(view, models[i]);
+            PokerCard card = new PokerCard(models[i]);
+            cards.Add(card);
         }
         return cards;
     }

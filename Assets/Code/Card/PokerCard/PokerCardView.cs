@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class PokerCardView : MonoBehaviour, ICardView
 {
     public RectTransform RectTransform { get { return _RectTransform; } }
+    public Animator Animator { get { return _Animator;  } }
 
     public void Skin(Sprite sprite)
     {
@@ -15,10 +16,12 @@ public class PokerCardView : MonoBehaviour, ICardView
 
     private Image _Image;
     private RectTransform _RectTransform;
+    private Animator _Animator;
 
     void Awake()
     {
         _Image = GetComponent<Image>();
         _RectTransform = GetComponent<RectTransform>();
+        _Animator = GetComponent<Animator>();
     }
 }
