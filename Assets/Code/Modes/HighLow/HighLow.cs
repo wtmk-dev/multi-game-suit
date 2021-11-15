@@ -67,7 +67,7 @@ public class HighLow : State
         RegisterOnSelectedBets();
 
         _View.OverlayText.SetActive(true);
-        _View.SetOverlayText("<rainb>Hello Welcome</rainb> \n this is High Low \n Please place your bet!");
+        _View.SetOverlayText(_StateData.IdelStateText);
         _StateData.IdelStateTimer.OnTimerComplete += Idle_HideOverlayText;
         _StateData.IdelStateTimer.Start(_StateData.IdelShowOverlayTime);
     }
@@ -95,7 +95,7 @@ public class HighLow : State
             _StateData.IdelStateTimer.OnTimerComplete += Idle_HideOverlayText;
             _StateData.IdelStateTimer.OnTimerComplete -= Idle_ShowOverlayText;
             _View.OverlayText.SetActive(true);
-            _View.SetOverlayText("<rainb>Hello Welcome</rainb> \n this is High Low \n Please place your bet!");
+            _View.SetOverlayText(_StateData.IdelStateText);
             _StateData.IdelStateTimer.Start(_StateData.IdelShowOverlayTime);
         }
         else
@@ -129,7 +129,6 @@ public class HighLow : State
     private void BetSelected(BetEventArgs bet)
     {
         UnregisterOnSelectedBets();
-
         if(_GameData.PlaceBet(bet.Bet))
         {
             StateChange(HighLowState.Deal);
@@ -148,7 +147,7 @@ public class HighLow : State
         UnregisterLow();
 
         _View.OverlayText.SetActive(true);
-        _View.SetOverlayText("<shake>...LOWER!?</shake>");
+        _View.SetOverlayText("{horiexp}...LOWER!?{/horiexp}");
 
         StateChange(HighLowState.Pick);
     }
@@ -160,7 +159,7 @@ public class HighLow : State
         UnregisterLow();
 
         _View.OverlayText.SetActive(true);
-        _View.SetOverlayText("<shake>..HIGHER!?</shake>");
+        _View.SetOverlayText("{horiexp}..HIGHER!?{/horiexp}");
 
         StateChange(HighLowState.Pick);
     }
@@ -218,7 +217,7 @@ public class HighLow : State
         {
             _StateData.WinStreak++;
             int totalWin = _GameData.CurrentBet * _StateData.WinStreak;
-            SetOverlayText($"<wiggle>Beautiful!</wiggle>\n<incr>WIN STREAK -{_StateData.WinStreak}<incr>\nTOTAL WIN ${totalWin}");
+            SetOverlayText($"<wiggle>Beautiful!</wiggle>\n<incr>WIN STREAK {_StateData.WinStreak}<incr>\nTOTAL WIN ${totalWin}");
             _GameData.AddWinnings(totalWin);
 
             SetCardState(_StateData.Base, PokerCardState.FaceDown);
@@ -226,7 +225,7 @@ public class HighLow : State
         else
         {
             _StateData.WinStreak = 0;
-            SetOverlayText($"<bounce>QQ--Better Luck next time.</bounce>");
+            SetOverlayText($"<bounce>QQ--\nBetter luck next time.</bounce>");
             SetCardState(_StateData.Base, PokerCardState.FaceDown);
             
             _StateData.Base = null;
@@ -448,6 +447,8 @@ public class HighLowStateData : Updatable
     public PokerCard Left, Right, Base = null;
 
     public int WinStreak;
+
+    public readonly string IdelStateText = "{vertexp}Hello Welcome\nThis is High Low \n Please place your bet!{/vertexp}";
 
     public void Update()
     {
