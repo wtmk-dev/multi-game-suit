@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Febucci.UI;
 
 public class HighLowView : StateView
 {
@@ -19,13 +20,13 @@ public class HighLowView : StateView
 
     public void SetOverlayText(string text)
     {
-        _OverlayText.SetText(text);
+        _OverlayText.ShowText(text);
     }
 
     [SerializeField]
     private Canvas _UI;
     [SerializeField]
-    private TextMeshProUGUI _OverlayText;
+    private TextAnimatorPlayer _OverlayText;
 
     private void Awake()
     {
