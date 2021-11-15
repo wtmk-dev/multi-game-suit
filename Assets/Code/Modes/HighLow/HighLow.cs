@@ -75,6 +75,12 @@ public class HighLow : State
     private void Idle_HideOverlayText()
     {
         _StateData.IdelStateTimer.OnTimerComplete -= Idle_HideOverlayText;
+
+        if (_State == HighLowState.Deal)
+        {
+            return;
+        }
+
         _StateData.IdelStateTimer.OnTimerComplete += Idle_ShowOverlayText;
         _View.OverlayText.SetActive(false);
         _View.SetOverlayText("");
@@ -108,8 +114,8 @@ public class HighLow : State
         RegisterHigh();
         RegisterLow();
 
-        _StateData.DealStateTimer.OnTimerComplete += Deal_MessageHide;
-        _StateData.DealStateTimer.Start(_StateData.DealShowOverlayTime);
+        //_StateData.DealStateTimer.OnTimerComplete += Deal_MessageHide;
+        //_StateData.DealStateTimer.Start(_StateData.DealShowOverlayTime);
         //wait for player to take action
     }
 
@@ -212,7 +218,7 @@ public class HighLow : State
         {
             _StateData.WinStreak++;
             int totalWin = _GameData.CurrentBet * _StateData.WinStreak;
-            SetOverlayText($"<wiggle>Beautiful!</wiggle>\n<incr>WIN STREAK -{_StateData.WinStreak} : TOTAL WIN -{totalWin}<incr>");
+            SetOverlayText($"<wiggle>Beautiful!</wiggle>\n<incr>WIN STREAK -{_StateData.WinStreak}<incr>\nTOTAL WIN ${totalWin}");
             _GameData.AddWinnings(totalWin);
 
             SetCardState(_StateData.Base, PokerCardState.FaceDown);
@@ -220,7 +226,7 @@ public class HighLow : State
         else
         {
             _StateData.WinStreak = 0;
-            SetOverlayText($"<bounce>Better luck next time." + "\nRun it back?</bounce>");
+            SetOverlayText($"<bounce>QQ--Better Luck next time.</bounce>");
             SetCardState(_StateData.Base, PokerCardState.FaceDown);
             
             _StateData.Base = null;
@@ -430,13 +436,13 @@ public class HighLowStateData : Updatable
     public readonly float DealShowOverlayTime = 9300f;
 
     public Timer PickStateTimer;
-    public readonly float PickShowOverlayTime = 7600f;
+    public readonly float PickShowOverlayTime = 6700f;
 
     public Timer RevealStateTimer;
-    public readonly float RevealShowOverlayTime = 2300f;
+    public readonly float RevealShowOverlayTime = 2400f;
 
     public Timer CelebrateStateTimer;
-    public readonly float CelebrateShowOverlayTime = 7600f;
+    public readonly float CelebrateShowOverlayTime = 7300f;
 
     public PokerDeck Deck { get { return _Deck; } }
     public PokerCard Left, Right, Base = null;
