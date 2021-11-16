@@ -6,6 +6,9 @@ https://wtmk-bk.itch.io/multi-card-game
 
 # Games Implemented
 High Low
+Blackjack
+TO:DO
+Poker 5/7 card, Auto play, Payouts ui, Juice
 
 # Art Used
 https://gatoparty.itch.io/ruby-gold-ui-pack
