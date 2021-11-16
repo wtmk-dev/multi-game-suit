@@ -15,7 +15,7 @@ public class RMG_GameData
 
     public string CurrentGameMode { get { return _CurrentGameMode; } set { _CurrentGameMode = value; } }
     public int CurrentBet { get { return _CurrentBet; } set { _CurrentBet = value; } }
-
+    public int BaseBet { get { return _BaseBet; } set { _BaseBet = value; } }
 
     public void SetGameMode(string mode)
     {
@@ -45,9 +45,11 @@ public class RMG_GameData
     private string _CurrentGameMode;
     private int _Money;
     private int _CurrentBet;
+    private int _BaseBet;
     public RMG_GameData() 
     { 
         _Money = 9999999;
         _CurrentBet = 0;
+        _BaseBet = 5;
     }
 }

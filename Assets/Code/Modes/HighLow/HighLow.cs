@@ -50,7 +50,7 @@ public class HighLow : State
 
     private void InitBets()
     {
-        int baseBet = 5;
+        int baseBet = _GameData.BaseBet;
         for (int i = 0; i < _View.Bets.Count; i++)
         {
             if(i != 0)
@@ -58,6 +58,7 @@ public class HighLow : State
                 baseBet *= i;
             }
 
+            _View.Bets[i].gameObject.SetActive(true);
             _View.Bets[i].Init(new BetEventArgs(baseBet));
         }
     }
@@ -105,6 +106,7 @@ public class HighLow : State
             StateChange(HighLowState.Idle);
         }
     }
+
     private void OnLowSelected()
     {
         _StateData.Selection = HighLowSelection.Low;

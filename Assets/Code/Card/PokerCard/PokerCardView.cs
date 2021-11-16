@@ -1,11 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Image), typeof(RectTransform))]
-public class PokerCardView : MonoBehaviour, ICardView
+public class PokerCardView : MonoBehaviour, ICardView, IPoolable
 {
+    public event Action<IPoolable> OnReturnRequest;
     public RectTransform RectTransform { get { return _RectTransform; } }
     public Animator Animator { get { return _Animator;  } }
 

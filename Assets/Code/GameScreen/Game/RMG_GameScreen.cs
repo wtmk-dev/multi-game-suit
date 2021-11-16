@@ -49,7 +49,7 @@ public class RMG_GameScreen : State
     private IState[] BuildModes()
     {
         _HighLow = new HighLow(_View.HighLow, _Deck);
-        _Blackjack = new Blackjack(_View.Blackjack);
+        _Blackjack = new Blackjack(_View.Blackjack, _Deck);
         _FiveCard = new Poker(_View.Poker, _GameModes.Poker5);
         _SevenCard = new Poker(_View.Poker, _GameModes.Poker7);
 
