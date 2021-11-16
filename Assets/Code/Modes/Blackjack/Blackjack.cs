@@ -231,7 +231,6 @@ public class Blackjack : GameMode
         PokerCardView view = _View.GetCardView();
         PokerCard card = (PokerCard)_StateData.Deck.Draw();
         card.SetView(view);
-        card.View.SetActive(true);
         card.SetState(PokerCardState.FaceDown);
         return card;
     }
@@ -365,23 +364,11 @@ public class Blackjack : GameMode
             _StateData.DealerBust = true;
             StateChange(BlackjackState.Celebrate);
         }
-        else if (scoreToUse == _Rules.Blackjack) 
+        else
         {
             StateChange(BlackjackState.Celebrate);
         }
-        else if(scoreToUse == GetPlayersScoreToUse(_StateData.PlayersHand))
-        {
-            StateChange(BlackjackState.Celebrate);
-        }
-        else if (scoreToUse > GetPlayersScoreToUse(_StateData.PlayersHand))
-        {
-            _StateData.DealerWin = true;
-            StateChange(BlackjackState.Celebrate);
-        }
-        else if(scoreToUse > _Rules.DealerMinToStay)
-        {
-            StateChange(BlackjackState.Celebrate);
-        }
+        
     }
 
     private int GetPlayersScoreToUse(List<PokerCard> hand)
