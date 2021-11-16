@@ -8,6 +8,7 @@ public class Blackjack : GameMode
 
     public override void OnEnter()
     {
+        RegisterGameScreenEvents();
         StateChange(BlackjackState.Init);
     }
 
@@ -17,6 +18,19 @@ public class Blackjack : GameMode
         return _Ready;
     }
 
+    public override void OnExit()
+    {
+        UnregisterGameScreenEvents();
+        ClearHand(_StateData.DealersHand);
+        ClearHand(_StateData.PlayersHand);
+        _View.SetPlayerScore("");
+        _View.SetDealerScore("");
+        _View.SetActive(false);
+        
+        _Ready = false;
+    }
+
+    private EventManager _EventManager = EventManager.Instance;
     private Dood _Debug = Dood.Instance;
     private BlackjackView _View;
     private GameModeTag _GameModeTag = new GameModeTag();
@@ -38,18 +52,23 @@ public class Blackjack : GameMode
         RegisterStateEnter();
     }
 
+
     private void OnStaySelected()
     {
-        UnegisterStay();
+        UnregisterStay();
         UnregisterHit();
+        _EventManager.FireEvent(MenuEvent.GameSelectMenuHide.ToString());
+
         _StateData.Selection = BlackjackSelection.Stay;
         StateChange(BlackjackState.Resolve);
     }
 
     private void OnHitSelected()
     {
-        UnegisterStay();
+        UnregisterStay();
         UnregisterHit();
+        _EventManager.FireEvent(MenuEvent.GameSelectMenuHide.ToString());
+
         _StateData.Selection = BlackjackSelection.Hit;
         StateChange(BlackjackState.Resolve);
     }
@@ -57,6 +76,7 @@ public class Blackjack : GameMode
     private void BetSelected(BetEventArgs bet)
     {
         UnregisterOnSelectedBets();
+        _EventManager.FireEvent(MenuEvent.GameSelectMenuHide.ToString());
 
         _StateData.SetBetMulti(bet.BetMulti);
 
@@ -73,7 +93,11 @@ public class Blackjack : GameMode
 
     private void Init_Enter()
     {
-        _StateData = new BlackjackStateData(_Deck);
+        if (_StateData == null)
+        {
+            _StateData = new BlackjackStateData(_Deck);
+        }
+        
         _View.SetActive(true);
         _View.OverlayText.SetActive(false);
 
@@ -522,7 +546,7 @@ public class Blackjack : GameMode
         _View.Hit.onClick.AddListener(OnHitSelected);
     }
 
-    private void UnegisterStay()
+    private void UnregisterStay()
     {
         _View.Stay.onClick.RemoveListener(OnStaySelected);
     }
@@ -559,6 +583,19 @@ public class Blackjack : GameMode
     {
         _View.OverlayText.SetActive(true);
         _View.SetOverlayText(text);
+    }
+
+    protected override void OnGameSelect(string name, object data)
+    {
+        if(_State == BlackjackState.Idle)
+        {
+            _EventManager.FireEvent(MenuEvent.GameSelectMenuShow.ToString());
+        }
+    }
+
+    protected override void OnGameSelectExit(string name, object data)
+    {
+
     }
 }
 

@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class HighLow : State 
+public class HighLow : GameMode 
 {
     public override string Tag { get; protected set; }
     public override IStateView View { get { return _View; } }
 
     public override void OnEnter()
     {
+        RegisterGameScreenEvents();
         StateChange(HighLowState.Init);
     }
 
@@ -17,6 +18,16 @@ public class HighLow : State
         return _Ready;
     }
 
+    public override void OnExit()
+    {
+        UnregisterGameScreenEvents();
+        _View.SetActive(false);
+
+
+        _Ready = false;
+    }
+
+    private EventManager _EventManager = EventManager.Instance;
     private Dood _Debug = Dood.Instance;
     private HighLowView _View;
 
@@ -40,7 +51,11 @@ public class HighLow : State
     
     private void Init_Enter()
     {
-        _StateData = new HighLowStateData(_Deck);
+        if(_StateData == null)
+        {
+            _StateData = new HighLowStateData(_Deck);
+        }
+        
         _View.SetActive(true);
         _View.OverlayText.SetActive(false);
 
@@ -95,7 +110,9 @@ public class HighLow : State
     private void BetSelected(BetEventArgs bet)
     {
         UnregisterOnSelectedBets();
-        if(_GameData.PlaceBet(bet.Bet))
+        _EventManager.FireEvent(MenuEvent.GameSelectMenuHide.ToString());
+
+        if (_GameData.PlaceBet(bet.Bet))
         {
             StateChange(HighLowState.Deal);
         }
@@ -111,6 +128,7 @@ public class HighLow : State
         _StateData.Selection = HighLowSelection.Low;
         UnregisterHigh();
         UnregisterLow();
+        
 
         _View.OverlayText.SetActive(true);
        
@@ -124,6 +142,7 @@ public class HighLow : State
         _StateData.Selection = HighLowSelection.High;
         UnregisterHigh();
         UnregisterLow();
+        _EventManager.FireEvent(MenuEvent.GameSelectMenuHide.ToString());
 
         _View.OverlayText.SetActive(true);
        
@@ -370,6 +389,19 @@ public class HighLow : State
     {
         _View.SetOverlayText("");
         _View.OverlayText.SetActive(false);
+    }
+
+    protected override void OnGameSelect(string name, object data)
+    {
+        if (_State == HighLowState.Idle)
+        {
+            _EventManager.FireEvent(MenuEvent.GameSelectMenuShow.ToString());
+        }
+    }
+
+    protected override void OnGameSelectExit(string name, object data)
+    {
+       
     }
 }
 

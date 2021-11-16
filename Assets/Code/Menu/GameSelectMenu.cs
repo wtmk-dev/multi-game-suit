@@ -6,19 +6,31 @@ using UnityEngine.UI;
 public class GameSelectMenu : MonoBehaviour
 {
     public Button HighLow, Blackjack, Exit;
+    public GameObject Frame, GridLayout;
 
     private EventManager _EventManager = EventManager.Instance;
     private GameModeTag _GameModes = new GameModeTag();
 
     private void Awake()
     {
-        _EventManager.RegisterEventCallback(RMG_GameScreenEvent.GameSelect.ToString(), OnGameSelect);
+        _EventManager.RegisterEventCallback(MenuEvent.GameSelectMenuShow.ToString(), OnShowMenu);
+        _EventManager.RegisterEventCallback(MenuEvent.GameSelectMenuHide.ToString(), OnHideMenu);
     }
 
-    private void OnGameSelect(string name, object data)
+    private void Start()
     {
+        SetActive(false);
+    }
+
+    private void OnShowMenu(string name, object data)
+    {
+        SetActive(true);
         Register();
-        SetActive(transform);
+    }
+
+    private void OnHideMenu(string name, object data)
+    {
+        _Exit();
     }
 
     private void OnBlackjack()
@@ -35,14 +47,18 @@ public class GameSelectMenu : MonoBehaviour
 
     private void OnExit()
     {
-        _EventManager.FireEvent(MenuEvent.GameSelectMenuExit.ToString());
         _Exit();
     }
 
     private void _Exit()
     {
-        Unregister();
-        SetActive(false);
+        if(Frame.activeInHierarchy == true)
+        {
+            SetActive(false);
+            Unregister();
+
+            _EventManager.FireEvent(MenuEvent.GameSelectMenuHideComplete.ToString());
+        }
     }
 
     private void Register()
@@ -61,11 +77,14 @@ public class GameSelectMenu : MonoBehaviour
 
     private void SetActive(bool isActive)
     {
-        gameObject.SetActive(isActive);
+        Frame.gameObject.SetActive(isActive);
+        GridLayout.gameObject.SetActive(isActive);
     }
 }
 
 public enum MenuEvent
 {
-    GameSelectMenuExit,
+    GameSelectMenuShow,
+    GameSelectMenuHide,
+    GameSelectMenuHideComplete
 }

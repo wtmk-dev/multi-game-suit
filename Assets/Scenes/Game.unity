@@ -2685,9 +2685,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b1390d4af02f6d43afe441a9e22750b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HighLow: {fileID: 0}
-  Blackjack: {fileID: 0}
-  Exit: {fileID: 0}
+  HighLow: {fileID: 957130744}
+  Blackjack: {fileID: 1960319990}
+  Exit: {fileID: 2117479670}
+  Frame: {fileID: 1759966351}
+  GridLayout: {fileID: 1100204985}
 --- !u!114 &577657427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10616,7 +10618,7 @@ GameObject:
   - component: {fileID: 2117479671}
   - component: {fileID: 2117479670}
   m_Layer: 0
-  m_Name: Close
+  m_Name: Exit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

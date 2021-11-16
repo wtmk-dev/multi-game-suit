@@ -9,6 +9,7 @@ public class RMG_GameScreen : State
     public override void OnEnter()
     {
         _View.SetActive(true);
+        RegisterGameSelect();
         StartGameMode();
     }
 
@@ -40,9 +41,6 @@ public class RMG_GameScreen : State
         _Deck = deck;
 
         InitModes(BuildModes());
-        RegisterGameSelect();
-
-        _EventManager.RegisterEventCallback(MenuEvent.GameSelectMenuExit.ToString(), OnGameSelectExit);
     }
 
     private void RegisterGameSelect()
@@ -52,12 +50,11 @@ public class RMG_GameScreen : State
 
     private void UnregisterGameSelect()
     {
-        _View.GameSelect.onClick.AddListener(OnGameSelect);
+        _View.GameSelect.onClick.RemoveListener(OnGameSelect);
     }
 
     private void OnGameSelect()
     {
-        UnregisterGameSelect();
         _EventManager.FireEvent(RMG_GameScreenEvent.GameSelect.ToString());
     }
 
