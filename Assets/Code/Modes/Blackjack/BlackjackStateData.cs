@@ -9,7 +9,7 @@ public class BlackjackStateData : Updatable
     public readonly float IdelShowOverlayTime = 2600f;
 
     public Timer ResolveDealerTimer;
-    public readonly float ResolveDealerTime = 300f;
+    public readonly float ResolveDealerTime = 800f;
 
     public Timer PickStateTimer;
     public readonly float PickShowOverlayTime = 1800f;
@@ -18,7 +18,7 @@ public class BlackjackStateData : Updatable
     public readonly float BustTime = 1600f;
 
     public Timer CelebrateStateTimer;
-    public readonly float CelebrateShowOverlayTime = 2600f;
+    public readonly float CelebrateShowOverlayTime = 2800f;
 
     public PokerDeck Deck { get { return _Deck; } }
     public int BetMulti { get { return _BetMulti; } }
@@ -29,15 +29,25 @@ public class BlackjackStateData : Updatable
     public readonly string OnSlectedText = "{horiexp}1.2.3.{/horiexp}";
     public readonly string BustText = "{horiexp}<bounce>(X.X) BUST (X.X)</bounce>{horiexp}";
     public readonly string LoseText = "<bounce>Can't win em' all\nBut you can catch em' all";
+    public readonly string TieText = "PUSH";
 
     public string GetCelebrationText(int totalWin)
     {
         return $"<wiggle>WINNER!</wiggle>\n<incr>\nTOTAL WIN ${totalWin}<incr>";
     }
 
-    public string GetDeal_EnterText((int,int)score)
+    public string GetDeal_EnterText(bool aceInHand, (int,int)score)
     {
-        return "{vertexp}You have " + score +"\nWill you HIT or STAY{vertexp}";
+        string txt = "";
+        if(aceInHand)
+        {
+            txt = "{vertexp}You have " + score + "\nWill you HIT or STAY{vertexp}";
+        }
+        else
+        {
+            txt = "{vertexp}You have " + score.Item1 + "\nWill you HIT or STAY{vertexp}";
+        }
+        return txt;
     }
 
     public void Update()

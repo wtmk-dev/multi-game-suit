@@ -15,6 +15,15 @@ public class BlackjackView : StateView
     {
         _OverlayText.ShowText(text);
     }
+    public void SetDealerScore(string text)
+    {
+        _DealerScore.ShowText(text);
+    }
+
+    public void SetPlayerScore(string text)
+    {
+        _PlayerScore.ShowText(text);
+    }
 
     public PokerCardView GetCardView()
     {

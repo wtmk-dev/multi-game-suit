@@ -42,6 +42,12 @@ public class RMG_GameData
         }
     }
 
+    public void Push()
+    {
+        _Money += _CurrentBet;
+        _CurrentBet = 0;
+    }
+
     private string _CurrentGameMode;
     private int _Money;
     private int _CurrentBet;

@@ -37,7 +37,9 @@ public class RMG_Main : MonoBehaviour
 
     private void Start()
     {
+#if UNITY_EDITOR
         Dood.IsLogging = true;
+#endif
         GameStart();
     }
 

@@ -97,6 +97,11 @@ public class Blackjack : State
 
     private void Idle_Enter()
     {
+        _View.SetDealerScore("");
+        _View.SetPlayerScore("");
+
+        _StateData.ShuffleDeck();
+
         ClearHand(_StateData.PlayersHand);
         ClearHand(_StateData.DealersHand);
 
@@ -207,11 +212,17 @@ public class Blackjack : State
         RegisterStay();
         RegisterHit();
 
-        SetOverlayText(_StateData.GetDeal_EnterText(EvaluateHand(_StateData.PlayersHand)));
+        (int, int) score = EvaluateHand(_StateData.PlayersHand);
+        bool aceInHand = HasAceInHand(_StateData.PlayersHand);
+
+        SetPlayerScore(aceInHand, score);
+        SetOverlayText(_StateData.GetDeal_EnterText(aceInHand, score));
     }
 
     private void Resolve_Enter()
     {
+        SetOverlayText("");
+
         if (_StateData.Selection == BlackjackSelection.Hit)
         {
             Resolve_Hit();
@@ -230,18 +241,34 @@ public class Blackjack : State
         (int, int) score = EvaluateHand(_StateData.PlayersHand);
         _Debug.Log(score.ToString());
 
-        if (HasAceInHand(_StateData.PlayersHand) && score.Item2 == _Rules.Blackjack)
+        bool aceInHand = HasAceInHand(_StateData.PlayersHand);
+
+        SetPlayerScore(aceInHand, score);
+
+        if (aceInHand && score.Item2 == _Rules.Blackjack)
         {
             StateChange(BlackjackState.Outcome);
         } else if (score.Item1 < _Rules.MaxToHit)
         {
             StateChange(BlackjackState.Pick);
-        } else if (HasAceInHand(_StateData.PlayersHand) && score.Item2 < _Rules.MaxToHit)
+        } else if (aceInHand && score.Item2 < _Rules.MaxToHit)
         {
             StateChange(BlackjackState.Pick);
         } else 
         {
             StateChange(BlackjackState.Outcome);
+        }
+    }
+
+    private void SetPlayerScore(bool aceInHand, (int,int) score)
+    {
+        if (aceInHand)
+        {
+            _View.SetPlayerScore("{fade}" + score.ToString() + "{/fade}");
+        }
+        else
+        {
+            _View.SetPlayerScore("{fade}" + score.Item1.ToString() + "{/fade}");
         }
     }
 
@@ -290,7 +317,9 @@ public class Blackjack : State
         (int, int) score = EvaluateHand(_StateData.DealersHand);
         _Debug.Log(score.ToString());
 
-        int scoreToUse = SetDealersAceValue(score);
+        int scoreToUse = GetDealersScoreToUse(score);
+
+        _View.SetDealerScore("{fade}" + scoreToUse + "{/fade}");
 
         if (_StateData.DealersHand.Count == 2)
         {
@@ -306,7 +335,7 @@ public class Blackjack : State
         {
             StateChange(BlackjackState.Celebrate);
         }
-        else if (scoreToUse > GetScoreToUse(_StateData.PlayersHand))
+        else if (scoreToUse > GetPlayersScoreToUse(_StateData.PlayersHand))
         {
             _StateData.DealerWin = true;
             StateChange(BlackjackState.Celebrate);
@@ -321,7 +350,7 @@ public class Blackjack : State
         }
     }
 
-    private int GetScoreToUse(List<PokerCard> hand)
+    private int GetPlayersScoreToUse(List<PokerCard> hand)
     {
         (int, int) score = EvaluateHand(hand);
         if(!HasAceInHand(hand))
@@ -333,6 +362,10 @@ public class Blackjack : State
             {
                 return score.Item2;
             }
+            else if(score.Item1 < score.Item2)
+            {
+                return score.Item2;
+            }
             else
             {
                 return score.Item1;
@@ -340,9 +373,9 @@ public class Blackjack : State
         }
     }
 
-    private int SetDealersAceValue((int,int) score)
+    private int GetDealersScoreToUse((int,int) score)
     {
-        int scoreToUse = 0;
+        int scoreToUse = -1;
         if (HasAceInHand(_StateData.DealersHand))
         {
             if (score.Item1 >= _Rules.DealerMinToHit || score.Item2 >= _Rules.DealerMinToHit)
@@ -353,6 +386,10 @@ public class Blackjack : State
             {
                 scoreToUse = score.Item1;
             }
+        }
+        else
+        {
+            scoreToUse = score.Item1;
         }
         return scoreToUse;
     }
@@ -389,7 +426,6 @@ public class Blackjack : State
 
     private void Celebrate_Enter()
     {
-        _Debug.Log("Celebrate"); 
         if (_StateData.PlayerBust)
         {
             _StateData.PlayerBust = false;
@@ -406,8 +442,27 @@ public class Blackjack : State
         }
         else
         {
-            _Debug.Log("Player: " + EvaluateHand(_StateData.PlayersHand).ToString());
-            _Debug.Log("Dealer: " + EvaluateHand(_StateData.DealersHand).ToString());
+            (int, int) playerScore = EvaluateHand(_StateData.PlayersHand);
+            (int, int) dealerScore = EvaluateHand(_StateData.DealersHand);
+
+            int dealerScoreToUse = GetDealersScoreToUse(dealerScore);
+            int playerScoreToUse = GetPlayersScoreToUse(_StateData.PlayersHand);
+
+            if (playerScoreToUse == dealerScoreToUse)
+            {
+                _GameData.Push();
+                SetOverlayText(_StateData.TieText);
+            }else if(playerScoreToUse > dealerScoreToUse)
+            {
+                bool isBlackjack = playerScoreToUse == _Rules.Blackjack ? true : false; //maybe give bonus for 21
+                ResolveWin();
+            }else if (playerScoreToUse < dealerScoreToUse)
+            {
+                SetOverlayText(_StateData.LoseText);
+            }
+
+            _Debug.Log("Player: " + playerScore);
+            _Debug.Log("Dealer: " + dealerScore);
         }
 
         _StateData.CelebrateStateTimer.OnTimerComplete += Celebrate_Complete;
