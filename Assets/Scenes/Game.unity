@@ -290,6 +290,11 @@ MonoBehaviour:
   Blackjack: {fileID: 994448997}
   HighLow: {fileID: 530813734}
   GameSelect: {fileID: 1052499803}
+  Bets:
+  - {fileID: 351471651}
+  - {fileID: 408734239}
+  - {fileID: 1837802483}
+  - {fileID: 1990733776}
   _UI: {fileID: 1922664710}
 --- !u!4 &16287598
 Transform:
@@ -307,6 +312,7 @@ Transform:
   - {fileID: 994448996}
   - {fileID: 530813733}
   - {fileID: 1259353706}
+  - {fileID: 577657425}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -421,7 +427,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1447939296539213458, guid: 052e84024976e564a97524f3d3a9ca25, type: 3}
   m_PrefabInstance: {fileID: 29611829}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 408734239}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d19fdac37d6cdd4bb285fc98a138b9b, type: 3}
@@ -1879,6 +1885,16 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 347803760}
   m_CullTransparentMesh: 1
+--- !u!1 &351471651 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5032906410610766167, guid: 052e84024976e564a97524f3d3a9ca25, type: 3}
+  m_PrefabInstance: {fileID: 461817428}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &408734239 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5032906410610766167, guid: 052e84024976e564a97524f3d3a9ca25, type: 3}
+  m_PrefabInstance: {fileID: 29611829}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &409025148
 GameObject:
   m_ObjectHideFlags: 0
@@ -2247,7 +2263,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1143890828}
-  - {fileID: 577657425}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2362,7 +2377,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1447939296539213458, guid: 052e84024976e564a97524f3d3a9ca25, type: 3}
   m_PrefabInstance: {fileID: 461817428}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 351471651}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d19fdac37d6cdd4bb285fc98a138b9b, type: 3}
@@ -2665,8 +2680,8 @@ RectTransform:
   m_Children:
   - {fileID: 1759966352}
   - {fileID: 1100204986}
-  m_Father: {fileID: 460128225}
-  m_RootOrder: 1
+  m_Father: {fileID: 16287598}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3673,7 +3688,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1447939296539213458, guid: 052e84024976e564a97524f3d3a9ca25, type: 3}
   m_PrefabInstance: {fileID: 745605057}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1837802483}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d19fdac37d6cdd4bb285fc98a138b9b, type: 3}
@@ -9048,6 +9063,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1833020678}
   m_CullTransparentMesh: 1
+--- !u!1 &1837802483 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5032906410610766167, guid: 052e84024976e564a97524f3d3a9ca25, type: 3}
+  m_PrefabInstance: {fileID: 745605057}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1840343333
 GameObject:
   m_ObjectHideFlags: 0
@@ -9938,6 +9958,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1982055171}
   m_CullTransparentMesh: 1
+--- !u!1 &1990733776 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5032906410610766167, guid: 052e84024976e564a97524f3d3a9ca25, type: 3}
+  m_PrefabInstance: {fileID: 2022705650}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2011973168
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -20,7 +20,7 @@ public class RMG_GameData
 
     public string CurrentGameMode { get { return _CurrentGameMode; } set { _CurrentGameMode = value; } }
     public int CurrentBet { get { return _CurrentBet; } set { _CurrentBet = value; } }
-    public int BaseBet { get { return _BaseBet; } set { _BaseBet = value; } }
+    public int BaseBet { get { return _BaseBet; } private set { _BaseBet = value; } }
 
     public void SetGameMode(string mode)
     {
@@ -34,6 +34,7 @@ public class RMG_GameData
 
         OnWinningsChanged?.Invoke(totalWin);
         OnBetChanged?.Invoke(_CurrentBet);
+        OnWalletChanged?.Invoke(_Money);
     }
 
     public bool PlaceBet(int bet)

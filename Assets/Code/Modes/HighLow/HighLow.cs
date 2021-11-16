@@ -20,6 +20,9 @@ public class HighLow : GameMode
 
     public override void OnExit()
     {
+        UnregisterHigh();
+        UnregisterLow();
+        UnregisterOnSelectedBets();
         UnregisterGameScreenEvents();
         _View.SetActive(false);
 
@@ -335,7 +338,6 @@ public class HighLow : GameMode
         card.SetState(state);
     }
 
-   
     private PokerCard GetHighCard()
     {
         if (_StateData.Left.Model.Rank == _StateData.Right.Model.Rank)

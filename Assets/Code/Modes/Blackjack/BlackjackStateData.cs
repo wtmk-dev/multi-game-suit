@@ -25,6 +25,7 @@ public class BlackjackStateData : Updatable
     public List<PokerCard> DealersHand, PlayersHand;
 
     public readonly int StaringHandSize = 2;
+    public readonly string DealerBustText = "DEALER BUST";
     public readonly string IdelStateText = "{vertexp}Blackjack\nPlease place your bet!{/vertexp}";
     public readonly string OnSlectedText = "{horiexp}1.2.3.{/horiexp}";
     public readonly string BustText = "{horiexp}<bounce>(X.X) BUST (X.X)</bounce>{horiexp}";
@@ -67,6 +68,27 @@ public class BlackjackStateData : Updatable
     public void SetBetMulti(int value)
     {
         _BetMulti = value;
+    }
+
+    public void Clear()
+    {
+        IdelStateTimer.Stop();
+        ResolveDealerTimer.Stop();
+        PickStateTimer.Stop();
+        BustTimer.Stop();
+        CelebrateStateTimer.Stop();
+
+        PlayerBust = false;
+        DealerBust = false;
+        PlayerWin  =  false;
+        DealerWin  = false; 
+
+        DealersHand.Clear();
+        PlayersHand.Clear();
+
+        _BetMulti = 1;
+
+        ShuffleDeck();
     }
 
     private PokerDeck _Deck;

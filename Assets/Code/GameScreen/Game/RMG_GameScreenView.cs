@@ -10,6 +10,7 @@ public class RMG_GameScreenView : StateView
     public BlackjackView Blackjack;
     public HighLowView HighLow;
     public Button GameSelect;
+    public List<GameObject> Bets;
 
     [SerializeField]
     private Canvas _UI;

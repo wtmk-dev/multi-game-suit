@@ -43,6 +43,20 @@ public class HighLowStateData : Updatable
         CelebrateStateTimer.Tick();
     }
 
+    public void Clear()
+    {
+        IdelStateTimer.Stop();
+        DealStateTimer.Stop();
+        PickStateTimer.Stop();
+        RevealStateTimer.Stop();
+        CelebrateStateTimer.Stop();
+
+        IsWinner = false;
+        WinStreak = 0;
+
+        ShuffleDeck();
+    }
+
     public void ShuffleDeck()
     {
         _Deck.InitDeckFromCards();

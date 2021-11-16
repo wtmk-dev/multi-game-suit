@@ -20,12 +20,16 @@ public class Blackjack : GameMode
 
     public override void OnExit()
     {
+        UnregisterHit();
+        UnregisterStay();
+        UnregisterOnSelectedBets();
         UnregisterGameScreenEvents();
         ClearHand(_StateData.DealersHand);
         ClearHand(_StateData.PlayersHand);
         _View.SetPlayerScore("");
         _View.SetDealerScore("");
         _View.SetActive(false);
+        _StateData.Clear();
         
         _Ready = false;
     }
@@ -93,11 +97,11 @@ public class Blackjack : GameMode
 
     private void Init_Enter()
     {
-        if (_StateData == null)
+        if(_StateData == null)
         {
             _StateData = new BlackjackStateData(_Deck);
         }
-        
+
         _View.SetActive(true);
         _View.OverlayText.SetActive(false);
 
@@ -227,6 +231,7 @@ public class Blackjack : GameMode
         PokerCardView view = _View.GetCardView();
         PokerCard card = (PokerCard)_StateData.Deck.Draw();
         card.SetView(view);
+        card.View.SetActive(true);
         card.SetState(PokerCardState.FaceDown);
         return card;
     }
@@ -350,7 +355,12 @@ public class Blackjack : GameMode
             _StateData.DealersHand[1].SetState(PokerCardState.FaceUp);
         }
 
-        if (scoreToUse > _Rules.Blackjack)
+        if (scoreToUse < _Rules.DealerMinToHit)
+        {
+            _StateData.ResolveDealerTimer.OnTimerComplete += ResolveDealer_Hit;
+            _StateData.ResolveDealerTimer.Start(_StateData.ResolveDealerTime);
+
+        }else if (scoreToUse > _Rules.Blackjack)
         {
             _StateData.DealerBust = true;
             StateChange(BlackjackState.Celebrate);
@@ -359,16 +369,16 @@ public class Blackjack : GameMode
         {
             StateChange(BlackjackState.Celebrate);
         }
+        else if(scoreToUse == GetPlayersScoreToUse(_StateData.PlayersHand))
+        {
+            StateChange(BlackjackState.Celebrate);
+        }
         else if (scoreToUse > GetPlayersScoreToUse(_StateData.PlayersHand))
         {
             _StateData.DealerWin = true;
             StateChange(BlackjackState.Celebrate);
         }
-        else if (scoreToUse < _Rules.DealerMinToHit)
-        {
-            _StateData.ResolveDealerTimer.OnTimerComplete += ResolveDealer_Hit;
-            _StateData.ResolveDealerTimer.Start(_StateData.ResolveDealerTime);
-        }else if(scoreToUse > _Rules.DealerMinToStay)
+        else if(scoreToUse > _Rules.DealerMinToStay)
         {
             StateChange(BlackjackState.Celebrate);
         }
@@ -383,6 +393,15 @@ public class Blackjack : GameMode
         }else
         {
             if(score.Item1 > _Rules.Blackjack && score.Item2 < _Rules.Blackjack)
+            {
+                return score.Item2;
+            }
+            else if(score.Item1 == _Rules.Blackjack)
+            {
+                return score.Item1;
+
+            }
+            else if (score.Item2 == _Rules.Blackjack)
             {
                 return score.Item2;
             }
@@ -458,6 +477,7 @@ public class Blackjack : GameMode
         else if(_StateData.DealerBust)
         {
             _StateData.DealerBust = false;
+            _View.SetDealerScore(""+GetDealersScoreToUse(EvaluateHand(_StateData.DealersHand)));
             ResolveWin();
         }
         else if(_StateData.DealerWin)
@@ -487,6 +507,8 @@ public class Blackjack : GameMode
 
             _Debug.Log("Player: " + playerScore);
             _Debug.Log("Dealer: " + dealerScore);
+            _Debug.Log("dealerScoreToUse: " + playerScore);
+            _Debug.Log("playerScoreToUse: " + dealerScore);
         }
 
         _StateData.CelebrateStateTimer.OnTimerComplete += Celebrate_Complete;

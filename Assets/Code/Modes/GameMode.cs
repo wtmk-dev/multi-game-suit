@@ -1,25 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-
+using System;
 public class GameMode : State
 {
+    public event Action OnModeChange;
     private EventManager _EventManager = EventManager.Instance;
 
     protected virtual void RegisterGameScreenEvents()
     {
         _EventManager.RegisterEventCallback(RMG_GameScreenEvent.GameSelect.ToString(), OnGameSelect);
         _EventManager.RegisterEventCallback(RMG_GameScreenEvent.GameSelected.ToString(), OnGameSelected);
-
-        //_EventManager.RegisterEventCallback(RMG_GameScreenEvent.GameSelectExit.ToString(), OnGameSelectExit);
     }
 
     protected virtual void UnregisterGameScreenEvents()
     {
         _EventManager.UnregisterEventCallback(RMG_GameScreenEvent.GameSelect.ToString(), OnGameSelect);
         _EventManager.UnregisterEventCallback(RMG_GameScreenEvent.GameSelected.ToString(), OnGameSelected);
-
-        // _EventManager.UnregisterEventCallback(RMG_GameScreenEvent.GameSelectExit.ToString(), OnGameSelectExit);
     }
 
     protected virtual void OnGameSelect(string name, object data)
@@ -36,6 +32,8 @@ public class GameMode : State
             //TO:DO check for valid transtion
             NextState = nextGame;
             _Ready = true;
+
+            OnModeChange?.Invoke();
         }
     }
 
