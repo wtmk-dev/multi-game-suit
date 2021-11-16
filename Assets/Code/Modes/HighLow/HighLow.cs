@@ -51,15 +51,14 @@ public class HighLow : State
     private void InitBets()
     {
         int baseBet = _GameData.BaseBet;
+
         for (int i = 0; i < _View.Bets.Count; i++)
         {
-            if(i != 0)
-            {
-                baseBet *= i;
-            }
+            int multi = (i + 1);
+            baseBet *= multi;
 
             _View.Bets[i].gameObject.SetActive(true);
-            _View.Bets[i].Init(new BetEventArgs(baseBet));
+            _View.Bets[i].Init(new BetEventArgs(baseBet, multi));
         }
     }
 
