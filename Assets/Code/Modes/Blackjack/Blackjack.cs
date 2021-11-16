@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Blackjack : State 
+public class Blackjack : GameMode
 {
     public override string Tag { get; protected set; }
     public override IStateView View { get { return _View; } }

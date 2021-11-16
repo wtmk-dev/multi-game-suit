@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class RMG_GameScreenView : StateView
 {
     public PokerView Poker;
     public BlackjackView Blackjack;
     public HighLowView HighLow;
+    public Button GameSelect;
 
     [SerializeField]
     private Canvas _UI;
-
+    
     public void SetCanvasAsParent(List<RectTransform> transforms)
     {
         for (int i = 0; i < transforms.Count; i++)

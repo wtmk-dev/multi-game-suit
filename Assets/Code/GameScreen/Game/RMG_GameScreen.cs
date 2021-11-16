@@ -20,6 +20,8 @@ public class RMG_GameScreen : State
 
     private GameScreenTags _ScreenTags = new GameScreenTags();
     private RMG_GameData _GameData = RMG_GameData.Instance;
+    private EventManager _EventManager = EventManager.Instance;
+
     private RMG_GameScreenView _View;
     private PokerDeck _Deck;
 
@@ -38,6 +40,31 @@ public class RMG_GameScreen : State
         _Deck = deck;
 
         InitModes(BuildModes());
+        RegisterGameSelect();
+
+        _EventManager.RegisterEventCallback(MenuEvent.GameSelectMenuExit.ToString(), OnGameSelectExit);
+    }
+
+    private void RegisterGameSelect()
+    {
+        _View.GameSelect.onClick.AddListener(OnGameSelect);   
+    }
+
+    private void UnregisterGameSelect()
+    {
+        _View.GameSelect.onClick.AddListener(OnGameSelect);
+    }
+
+    private void OnGameSelect()
+    {
+        UnregisterGameSelect();
+        _EventManager.FireEvent(RMG_GameScreenEvent.GameSelect.ToString());
+    }
+
+    private void OnGameSelectExit(string name, object data)
+    {
+        RegisterGameSelect();
+        _EventManager.FireEvent(RMG_GameScreenEvent.GameSelectExit.ToString());
     }
 
     private void StartGameMode()
@@ -72,4 +99,11 @@ public class RMG_GameScreen : State
         }
         return transforms;
     }
+}
+
+public enum RMG_GameScreenEvent
+{
+    GameSelect,
+    GameSelected,
+    GameSelectExit
 }
