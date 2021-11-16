@@ -17,6 +17,16 @@ public class PokerCardView : MonoBehaviour, ICardView, IPoolable
         _Image.sprite = sprite;
     }
 
+    public void Kill()
+    {
+        OnReturnRequest?.Invoke(this);
+    }
+
+    public void SetActive(bool isActive)
+    {
+        gameObject.SetActive(isActive);
+    }
+
     private Image _Image;
     private RectTransform _RectTransform;
     private Animator _Animator;

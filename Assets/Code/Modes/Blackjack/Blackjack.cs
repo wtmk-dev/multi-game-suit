@@ -40,12 +40,16 @@ public class Blackjack : State
 
     private void OnStaySelected()
     {
+        UnegisterStay();
+        UnregisterHit();
         _StateData.Selection = BlackjackSelection.Stay;
         StateChange(BlackjackState.Resolve);
     }
 
     private void OnHitSelected()
     {
+        UnegisterStay();
+        UnregisterHit();
         _StateData.Selection = BlackjackSelection.Hit;
         StateChange(BlackjackState.Resolve);
     }
@@ -106,6 +110,7 @@ public class Blackjack : State
     {
         int valAceAs1 = 0;
         int valAceAs11 = 0;
+
         for (int i = 0; i < hand.Count; i++)
         {
             if(hand[i].Model.Rank == PokerCardRank.Ace)
@@ -116,7 +121,6 @@ public class Blackjack : State
             else
             {
                 valAceAs11 += _Rules.CardValue[hand[i].Model.Rank];
-                valAceAs11 += 10;
                 valAceAs1 += _Rules.CardValue[hand[i].Model.Rank];
             }
         }
@@ -136,10 +140,12 @@ public class Blackjack : State
         ShowCard(_StateData.DealersHand[0]);
     }
 
-    private void DealCard(UnityEngine.Transform target)
+    private void DealCard(List<PokerCard> hand, UnityEngine.Transform target)
     {
-        PokerCard card = (PokerCard) _StateData.Deck.Draw();
+        PokerCard card = GetViewBoundCard();
         AttachCardToGroupView(card, target);
+        card.SetState(PokerCardState.FaceUp);
+        hand.Add(card);
     }
 
     private void ShowCardsInHand(List<PokerCard> hand)
@@ -190,58 +196,152 @@ public class Blackjack : State
         return card;
     }
 
-    private void Deal_MessageHide()
-    {
-        _StateData.DealStateTimer.OnTimerComplete -= Deal_MessageHide;
-        _View.SetOverlayText("");
-        _View.OverlayText.SetActive(false);
-    }
-
     private void Pick_Enter()
     {
         RegisterStay();
         RegisterHit();
+
         SetOverlayText(_StateData.GetDeal_EnterText(EvaluateHand(_StateData.PlayersHand)));
     }
 
     private void Resolve_Enter()
     {
-        if(_StateData.Selection == BlackjackSelection.Hit)
+        if (_StateData.Selection == BlackjackSelection.Hit)
         {
             Resolve_Hit();
         }else if(_StateData.Selection == BlackjackSelection.Stay)
         {
             Resolve_Stay();
         }
-
-        
     }
 
     private void Resolve_Hit()
     {
-        DealCard(_View.PlayersHandGroup.transform);
+        DealCard(_StateData.PlayersHand, _View.PlayersHandGroup.transform);
+        
         //check for bust or see if can hit again
 
         (int, int) score = EvaluateHand(_StateData.PlayersHand);
-        if (score.Item1 < _Rules.HighetsToStillHit)
+        _Debug.Log(score.ToString());
+
+        if (HasAceInHand(_StateData.PlayersHand) && score.Item2 == _Rules.Blackjack)
+        {
+            StateChange(BlackjackState.Outcome);
+        } else if (score.Item1 < _Rules.MaxToHit)
         {
             StateChange(BlackjackState.Pick);
+        } else if (HasAceInHand(_StateData.PlayersHand) && score.Item2 < _Rules.MaxToHit)
+        {
+            StateChange(BlackjackState.Pick);
+        } else 
+        {
+            StateChange(BlackjackState.Outcome);
         }
     }
 
     private void Resolve_Stay()
-    { 
-    
+    {
+        StateChange(BlackjackState.ResolveDealer);
     }
+
+    private bool HasAceInHand(List<PokerCard> hand)
+    {
+        bool hasAce = false;
+        for (int i = 0; i < hand.Count; i++)
+        {
+            if(hand[i].Model.Rank == PokerCardRank.Ace)
+            {
+                hasAce = true;
+                break;
+            }
+        }
+
+        return hasAce;
+    }
+
+    
 
     private void Outcome_Enter()
     {
-       
+        _Debug.Log("outcome");
+        (int, int) score = EvaluateHand(_StateData.PlayersHand);
+        //check for bust
+        if (score.Item1 > _Rules.Blackjack)
+        {
+            _StateData.HasBusted = true;
+            StateChange(BlackjackState.Celebrate);
+        } else if (HasAceInHand(_StateData.PlayersHand) && score.Item2 > _Rules.Blackjack)
+        {
+            _StateData.HasBusted = true;
+            StateChange(BlackjackState.Celebrate);
+        }
+        else
+        {
+            StateChange(BlackjackState.ResolveDealer);
+        }
+    }
+
+    private void ResolveDealer_Enter()
+    {
+        _StateData.DealersHand[1].SetState(PokerCardState.FaceUp);
+        (int, int) score = EvaluateHand(_StateData.DealersHand);
+        _Debug.Log(score.ToString());
+
+        int scoreToUse = SetDealersAceValue(score);
+
+        if (scoreToUse < _Rules.DealerMinToHit)
+        {
+            _StateData.ResolveDealerTimer.OnTimerComplete += ResolveDealer_Hit;
+            _StateData.ResolveDealerTimer.Start(_StateData.ResolveDealerTime);
+        }else if(scoreToUse > _Rules.DealerMinToStay)
+        {
+            StateChange(BlackjackState.Celebrate);
+        }
+    }
+
+    private int SetDealersAceValue((int,int) score)
+    {
+        int scoreToUse = 0;
+        if (HasAceInHand(_StateData.DealersHand))
+        {
+            if (score.Item1 >= _Rules.DealerMinToHit || score.Item2 >= _Rules.DealerMinToHit)
+            {
+                scoreToUse = score.Item2;
+            }
+            else if (score.Item1 <= _Rules.DealerMinToHit || score.Item2 <= _Rules.DealerMinToHit)
+            {
+                scoreToUse = score.Item1;
+            }
+        }
+        return scoreToUse;
+    }
+
+    private void ResolveDealer_Hit()
+    {
+        _StateData.ResolveDealerTimer.OnTimerComplete -= ResolveDealer_Hit;
     }
 
     private void Celebrate_Enter()
     {
-        
+        _Debug.Log("Celebrate");
+        if(_StateData.HasBusted)
+        {
+            _StateData.HasBusted = false;
+            SetOverlayText(_StateData.BustText);
+        }
+
+        ClearHand(_StateData.PlayersHand);
+        ClearHand(_StateData.DealersHand);
+    }
+
+    private void ClearHand(List<PokerCard> hand)
+    {
+        for (int i = 0; i < hand.Count; i++)
+        {
+            hand[i].View.Kill();
+        }
+
+        hand.Clear();
     }
 
     private void Celebrate_Complete()
@@ -258,6 +358,7 @@ public class Blackjack : State
         _StateProcess.RegisterEnter(BlackjackState.Deal.ToString(), Deal_Enter);
         _StateProcess.RegisterEnter(BlackjackState.Pick.ToString(), Pick_Enter);
         _StateProcess.RegisterEnter(BlackjackState.Resolve.ToString(), Resolve_Enter);
+        _StateProcess.RegisterEnter(BlackjackState.ResolveDealer.ToString(), ResolveDealer_Enter);
         _StateProcess.RegisterEnter(BlackjackState.Outcome.ToString(), Outcome_Enter);
         _StateProcess.RegisterEnter(BlackjackState.Celebrate.ToString(), Celebrate_Enter);
     }
@@ -278,6 +379,16 @@ public class Blackjack : State
     private void RegisterHit()
     {
         _View.Hit.onClick.AddListener(OnHitSelected);
+    }
+
+    private void UnegisterStay()
+    {
+        _View.Stay.onClick.RemoveListener(OnStaySelected);
+    }
+
+    private void UnregisterHit()
+    {
+        _View.Hit.onClick.RemoveListener(OnHitSelected);
     }
 
     private void UnregisterOnSelectedBets()
@@ -318,6 +429,7 @@ public enum BlackjackState
     Pick,
     Resolve,
     Outcome,
+    ResolveDealer,
     Celebrate,
     Idle
 }

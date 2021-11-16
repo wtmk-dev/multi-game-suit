@@ -2,14 +2,14 @@ using System.Collections.Generic;
 
 public class BlackjackStateData : Updatable
 {
-    public bool IsWinner;
+    public bool HasBusted;
     public BlackjackSelection Selection;
 
     public Timer IdelStateTimer;
     public readonly float IdelShowOverlayTime = 2600f;
 
-    public Timer DealStateTimer;
-    public readonly float DealShowOverlayTime = 300f;
+    public Timer ResolveDealerTimer;
+    public readonly float ResolveDealerTime = 300f;
 
     public Timer PickStateTimer;
     public readonly float PickShowOverlayTime = 1800f;
@@ -27,7 +27,7 @@ public class BlackjackStateData : Updatable
 
     public readonly string IdelStateText = "{vertexp}Blackjack\nPlease place your bet!{/vertexp}";
     public readonly string OnSlectedText = "{horiexp}1.2.3.{/horiexp}";
-    public readonly string Celebrate_EnterText = "<bounce>QQ--\nBetter luck next time.</bounce>";
+    public readonly string BustText = "<bounce>(X.X) BUST (X.X)</bounce>";
 
     public string GetCelebrationText(int winStreak, int totalWin)
     {
@@ -42,7 +42,7 @@ public class BlackjackStateData : Updatable
     public void Update()
     {
         IdelStateTimer.Tick();
-        DealStateTimer.Tick();
+        ResolveDealerTimer.Tick();
         PickStateTimer.Tick();
         RevealStateTimer.Tick();
         CelebrateStateTimer.Tick();
@@ -59,7 +59,7 @@ public class BlackjackStateData : Updatable
         _Deck = deck;
         _Deck.InitDeckFromCards();
         IdelStateTimer = new Timer(0f);
-        DealStateTimer = new Timer(0f);
+        ResolveDealerTimer = new Timer(0f);
         PickStateTimer = new Timer(0f);
         RevealStateTimer = new Timer(0f);
         CelebrateStateTimer = new Timer(0f);

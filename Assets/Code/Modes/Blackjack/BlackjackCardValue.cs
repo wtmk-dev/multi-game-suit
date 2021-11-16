@@ -3,7 +3,11 @@ using System.Collections.Generic;
 
 public class BlackjackCardValue
 {
-    public readonly int HighetsToStillHit = 20;
+    public readonly int MaxToHit = 20;
+    public readonly int Blackjack = 21;
+    public readonly int DealerMinToHit = 17;
+    public readonly int DealerMinToStay = 16;
+
     public Dictionary<PokerCardRank, int> CardValue { get { return _CardValue; } }
     private Dictionary<PokerCardRank, int> _CardValue = new Dictionary<PokerCardRank, int>();
 
