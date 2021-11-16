@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -13,6 +14,10 @@ public class RMG_GameData
         }
     }
 
+    public static event Action<int> OnBetChanged;
+    public static event Action<int> OnWalletChanged;
+    public static event Action<int> OnWinningsChanged;
+
     public string CurrentGameMode { get { return _CurrentGameMode; } set { _CurrentGameMode = value; } }
     public int CurrentBet { get { return _CurrentBet; } set { _CurrentBet = value; } }
     public int BaseBet { get { return _BaseBet; } set { _BaseBet = value; } }
@@ -26,6 +31,9 @@ public class RMG_GameData
     {
         _Money += _CurrentBet + totalWin;
         _CurrentBet = 0;
+
+        OnWinningsChanged?.Invoke(totalWin);
+        OnBetChanged?.Invoke(_CurrentBet);
     }
 
     public bool PlaceBet(int bet)
@@ -38,6 +46,9 @@ public class RMG_GameData
         {
             _CurrentBet = bet;
             _Money -= bet;
+
+            OnWalletChanged?.Invoke(_Money);
+            OnBetChanged?.Invoke(_CurrentBet);
             return true;
         }
     }
@@ -46,6 +57,9 @@ public class RMG_GameData
     {
         _Money += _CurrentBet;
         _CurrentBet = 0;
+
+        OnWalletChanged?.Invoke(_Money);
+        OnBetChanged?.Invoke(_CurrentBet);
     }
 
     private string _CurrentGameMode;
@@ -54,7 +68,7 @@ public class RMG_GameData
     private int _BaseBet;
     public RMG_GameData() 
     { 
-        _Money = 9999999;
+        _Money = 999;
         _CurrentBet = 0;
         _BaseBet = 5;
     }
