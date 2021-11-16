@@ -4,12 +4,13 @@ Games using poker cards
 # Game Link
 https://wtmk-bk.itch.io/multi-card-game 
 
-# Games Implemented
+# Completed
 High Low
 Blackjack
+Payouts ui
 
 # TO:DO
-Poker 5/7 card, Auto play, Payouts ui, Juice
+Poker 5/7 card, Auto play, Juice
 
 # Art Used
 https://gatoparty.itch.io/ruby-gold-ui-pack
