@@ -9,6 +9,7 @@ public class HighLow : GameMode
     public override void OnEnter()
     {
         RegisterGameScreenEvents();
+        
         StateChange(HighLowState.Init);
     }
 
@@ -25,7 +26,8 @@ public class HighLow : GameMode
         UnregisterOnSelectedBets();
         UnregisterGameScreenEvents();
         _View.SetActive(false);
-
+        _View.High.gameObject.SetActive(false);
+        _View.Low.gameObject.SetActive(false);
 
         _Ready = false;
     }
@@ -61,6 +63,9 @@ public class HighLow : GameMode
         
         _View.SetActive(true);
         _View.OverlayText.SetActive(false);
+        _View.High.gameObject.SetActive(true);
+        _View.Low.gameObject.SetActive(true);
+        _View.GameSelectGrid.gameObject.SetActive(true);
 
         InitBets();
         StateChange(HighLowState.Idle);

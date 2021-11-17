@@ -13,13 +13,14 @@ public class GameSelectMenu : MonoBehaviour
 
     private void Awake()
     {
-        _EventManager.RegisterEventCallback(MenuEvent.GameSelectMenuShow.ToString(), OnShowMenu);
-        _EventManager.RegisterEventCallback(MenuEvent.GameSelectMenuHide.ToString(), OnHideMenu);
+        //_EventManager.RegisterEventCallback(MenuEvent.GameSelectMenuShow.ToString(), OnShowMenu);
+        //_EventManager.RegisterEventCallback(MenuEvent.GameSelectMenuHide.ToString(), OnHideMenu);
     }
 
     private void Start()
     {
-        SetActive(false);
+        //SetActive(false);
+        Register();
     }
 
     private void OnShowMenu(string name, object data)
@@ -51,14 +52,16 @@ public class GameSelectMenu : MonoBehaviour
     }
 
     private void _Exit()
-    {
+    { 
+        /*
         if(Frame.activeInHierarchy == true)
         {
             SetActive(false);
             Unregister();
 
             _EventManager.FireEvent(MenuEvent.GameSelectMenuHideComplete.ToString());
-        }
+        } 
+        */
     }
 
     private void Register()

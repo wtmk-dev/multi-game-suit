@@ -11,6 +11,7 @@ public class HighLowView : StateView
     public Button High, Low;
     public List<BetController> Bets;
     public GameObject OverlayText;
+    public GameObject GameSelectGrid;
   
     public override void SetActive(bool isActive)
     {

@@ -10,6 +10,7 @@ public class BlackjackView : StateView
     public Button Hit, Stay;
     public List<BetController> Bets;
     public GameObject OverlayText;
+    public GameObject GameSelectGrid;
 
     public void SetOverlayText(string text)
     {
@@ -52,7 +53,7 @@ public class BlackjackView : StateView
             GameObject clone = Instantiate(_CardViewPrefab);
             PokerCardView view = clone.GetComponent<PokerCardView>();
             clone.transform.SetParent(transform);
-
+            clone.gameObject.SetActive(false);
             _CardViews[i] = view;
         }
 

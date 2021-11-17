@@ -9,6 +9,7 @@ public class Blackjack : GameMode
     public override void OnEnter()
     {
         RegisterGameScreenEvents();
+        
         StateChange(BlackjackState.Init);
     }
 
@@ -30,7 +31,10 @@ public class Blackjack : GameMode
         _View.SetDealerScore("");
         _View.SetActive(false);
         _StateData.Clear();
-        
+
+        _View.Hit.gameObject.SetActive(false);
+        _View.Stay.gameObject.SetActive(false);
+
         _Ready = false;
     }
 
@@ -104,6 +108,9 @@ public class Blackjack : GameMode
 
         _View.SetActive(true);
         _View.OverlayText.SetActive(false);
+        _View.Hit.gameObject.SetActive(true);
+        _View.Stay.gameObject.SetActive(true);
+        _View.GameSelectGrid.SetActive(true);
 
         InitBets();
         StateChange(BlackjackState.Idle);
