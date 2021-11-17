@@ -132,13 +132,15 @@ public class Blackjack : GameMode
 
     private void Idle_Enter()
     {
+        _EventManager.FireEvent(GameModeEvent.Idel.ToString());
+
         _View.SetDealerScore("");
         _View.SetPlayerScore("");
 
-        _StateData.ShuffleDeck();
-
         ClearHand(_StateData.PlayersHand);
         ClearHand(_StateData.DealersHand);
+
+        _StateData.ShuffleDeck();
 
         RegisterOnSelectedBets();
 
@@ -217,6 +219,7 @@ public class Blackjack : GameMode
 
     private void AttachCardToGroupView(PokerCard card, UnityEngine.Transform transform)
     {
+        card.View.gameObject.SetActive(true);
         card.View.transform.SetParent(transform);
     }
 
@@ -476,6 +479,7 @@ public class Blackjack : GameMode
         }
         else if(_StateData.DealerWin)
         {
+            _EventManager.FireEvent(GameModeEvent.Lose.ToString());
             SetOverlayText(_StateData.LoseText);
         }
         else
@@ -496,6 +500,7 @@ public class Blackjack : GameMode
                 ResolveWin();
             }else if (playerScoreToUse < dealerScoreToUse)
             {
+                _EventManager.FireEvent(GameModeEvent.Lose.ToString());
                 SetOverlayText(_StateData.LoseText);
             }
 
@@ -527,6 +532,7 @@ public class Blackjack : GameMode
         for (int i = 0; i < hand.Count; i++)
         {
             hand[i].View.Kill();
+            hand[i].View.SetActive(false);
         }
 
         hand.Clear();

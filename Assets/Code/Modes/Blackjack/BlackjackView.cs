@@ -38,7 +38,7 @@ public class BlackjackView : StateView
     [SerializeField]
     private TextAnimatorPlayer _OverlayText, _PlayerScore, _DealerScore;
 
-    private IPoolable[] _CardViews = new IPoolable[20];
+    private IPoolable[] _CardViews = new IPoolable[99];
     private Pool _CardViewPool;
 
     private void Awake()

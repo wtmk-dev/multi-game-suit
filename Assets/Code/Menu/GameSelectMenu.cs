@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GameSelectMenu : MonoBehaviour
 {
-    public Button HighLow, Blackjack, Exit;
+    public Button HighLow, Blackjack, Poker5;
     public GameObject Frame, GridLayout;
 
     private EventManager _EventManager = EventManager.Instance;
@@ -46,9 +46,14 @@ public class GameSelectMenu : MonoBehaviour
         _Exit();
     }
 
-    private void OnExit()
+    private void OnPoker5()
     {
-        _Exit();
+        _EventManager.FireEvent(RMG_GameScreenEvent.GameSelected.ToString(), _GameModes.Poker5);
+    }
+
+    private void OnPoker7()
+    {
+        _EventManager.FireEvent(RMG_GameScreenEvent.GameSelected.ToString(), _GameModes.Poker7);
     }
 
     private void _Exit()
@@ -68,14 +73,14 @@ public class GameSelectMenu : MonoBehaviour
     {
         HighLow.onClick.AddListener(OnHighLow);
         Blackjack.onClick.AddListener(OnBlackjack);
-        Exit.onClick.AddListener(OnExit);
+        Poker5.onClick.AddListener(OnPoker5);
     }
 
     private void Unregister()
     {
         HighLow.onClick.RemoveListener(OnHighLow);
         Blackjack.onClick.RemoveListener(OnBlackjack);
-        Exit.onClick.RemoveListener(OnExit);
+        Poker5.onClick.RemoveListener(OnPoker5);
     }
 
     private void SetActive(bool isActive)

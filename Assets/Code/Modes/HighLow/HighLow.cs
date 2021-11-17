@@ -88,7 +88,7 @@ public class HighLow : GameMode
     private void Idle_Enter()
     {
         RegisterOnSelectedBets();
-
+        _EventManager.FireEvent(GameModeEvent.Idel.ToString());
         _View.OverlayText.SetActive(true);
         _View.SetOverlayText(_StateData.IdelStateText);
     }
@@ -218,6 +218,7 @@ public class HighLow : GameMode
         }
         else
         {
+            _EventManager.FireEvent(GameModeEvent.Lose.ToString());
             _StateData.WinStreak = 0;
             SetOverlayText(_StateData.Celebrate_EnterText);
             SetCardState(_StateData.Base, PokerCardState.FaceDown);

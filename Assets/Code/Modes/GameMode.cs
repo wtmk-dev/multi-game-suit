@@ -43,3 +43,10 @@ public class GameMode : State
     }
 
 }
+
+public enum GameModeEvent
+{
+    Win,
+    Lose,
+    Idel
+}
