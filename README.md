@@ -1,5 +1,6 @@
 # multi-game-suit
 Games using poker cards
+Built as an example for potential employers to review, And submitted for git-hub game off 2021
 
 # Game Link
 https://wtmk-bk.itch.io/multi-card-game 
