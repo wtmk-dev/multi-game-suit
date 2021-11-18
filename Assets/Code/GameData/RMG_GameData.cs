@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class RMG_GameData
+sealed class RMG_GameData
 {
     private static readonly RMG_GameData _Instance = new RMG_GameData();
 
@@ -84,7 +84,8 @@ public class RMG_GameData
     private int _CurrentBet;
     private int _BaseBet;
     public bool _IsAutoPlay;
-    public RMG_GameData() 
+
+    private RMG_GameData() 
     { 
         _Money = 0;
         _CurrentBet = 0;

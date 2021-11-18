@@ -8,6 +8,10 @@ public class RMG_GameScreen : State
 
     public override void OnEnter()
     {
+        _GameData.AddMoney(999);
+        _GameData.SetBaseBet(5);
+        _View.AutoPlayActive.SetActive(_GameData.IsAutoPlay);
+
         _EventManager.FireEvent(_AudioEvent.Play, _Audio);
         _View.SetActive(true);
         RegisterGameSelect();
@@ -75,9 +79,7 @@ public class RMG_GameScreen : State
 
     private void StartGameMode()
     {
-        _GameData.AddMoney(999);
-        _GameData.SetBaseBet(5);
-        _View.AutoPlayActive.SetActive(_GameData.IsAutoPlay);
+        
 
         _EventManager.RegisterEventCallback(RMG_GameScreenEvent.AutoPlay.ToString(), OnAutoPlay);
         _ModeDirector.SetCurrentState(_GameData.CurrentGameMode);

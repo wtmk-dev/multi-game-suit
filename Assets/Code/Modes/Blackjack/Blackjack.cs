@@ -44,7 +44,7 @@ public class Blackjack : GameMode
     private GameModeTag _GameModeTag = new GameModeTag();
 
     private BlackjackState _State;
-    private RMG_GameData _GameData = new RMG_GameData();
+    private RMG_GameData _GameData = RMG_GameData.Instance;
     private StateProcess _StateProcess = new StateProcess();
 
     private BlackjackStateData _StateData;
@@ -247,8 +247,18 @@ public class Blackjack : GameMode
 
     private void Pick_Enter()
     {
-        RegisterStay();
-        RegisterHit();
+        if(_GameData.IsAutoPlay)
+        {
+            int scoreToUse = GetPlayersScoreToUse(_StateData.PlayersHand);
+            _StateData.Selection = GetHitOrStay(scoreToUse);
+            StateChange(BlackjackState.Resolve);
+        }
+        else
+        {
+            RegisterStay();
+            RegisterHit();
+        }
+        
 
         (int, int) score = EvaluateHand(_StateData.PlayersHand);
         bool aceInHand = HasAceInHand(_StateData.PlayersHand);
@@ -359,26 +369,58 @@ public class Blackjack : GameMode
 
         _View.SetDealerScore("{fade}" + scoreToUse + "{/fade}");
 
+        ShowDealerHiddenCard();
+        BlackjackSelection dealerSelection = GetHitOrStay(scoreToUse);
+
+        if (dealerSelection == BlackjackSelection.Hit)
+        {
+            DoDealerHit();            
+        }
+        else
+        {
+            SetDealerBust(scoreToUse);
+            StateChange(BlackjackState.Celebrate);
+        }
+        
+    }
+
+    private void DoDealerHit()
+    {
+        _StateData.ResolveDealerTimer.OnTimerComplete += ResolveDealer_Hit;
+        _StateData.ResolveDealerTimer.Start(_StateData.ResolveDealerTime);
+    }
+
+    private void SetDealerBust(int score)
+    {
+        if (score > _Rules.Blackjack)
+        {
+            _StateData.DealerBust = true;
+        }
+    }
+
+    private BlackjackSelection GetHitOrStay(int score)
+    {
+        if (score < _Rules.DealerMinToHit)
+        {
+            return BlackjackSelection.Hit;
+        }
+        else if (score > _Rules.Blackjack)
+        {
+            return BlackjackSelection.Stay;
+        }
+        else
+        {
+            return BlackjackSelection.Stay;
+        }
+    }
+
+    private void ShowDealerHiddenCard()
+    {
         if (_StateData.DealersHand.Count == 2)
         {
             _StateData.DealersHand[1].SetState(PokerCardState.FaceUp);
         }
 
-        if (scoreToUse < _Rules.DealerMinToHit)
-        {
-            _StateData.ResolveDealerTimer.OnTimerComplete += ResolveDealer_Hit;
-            _StateData.ResolveDealerTimer.Start(_StateData.ResolveDealerTime);
-
-        }else if (scoreToUse > _Rules.Blackjack)
-        {
-            _StateData.DealerBust = true;
-            StateChange(BlackjackState.Celebrate);
-        }
-        else
-        {
-            StateChange(BlackjackState.Celebrate);
-        }
-        
     }
 
     private int GetPlayersScoreToUse(List<PokerCard> hand)

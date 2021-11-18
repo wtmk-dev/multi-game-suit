@@ -40,7 +40,7 @@ public class HighLow : GameMode
     private StateProcess _StateProcess = new StateProcess();
 
     private HighLowState _State;
-    private RMG_GameData _GameData = new RMG_GameData();
+    private RMG_GameData _GameData = RMG_GameData.Instance;
 
     private HighLowStateData _StateData;
     private PokerDeck _Deck;
