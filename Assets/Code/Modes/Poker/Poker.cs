@@ -100,9 +100,18 @@ public class Poker : GameMode
     {
         SetOverlayText(_StateData.PickStateText);
         RevealHand(_StateData.PlayersHand);
-        RegisterHand(_StateData.PlayersHand);
-        RegisterExchange();
-        RegisterStay();
+
+
+        if(_GameData.IsAutoPlay)
+        {
+            OnStaySelected();
+        }
+        else
+        {
+            RegisterHand(_StateData.PlayersHand);
+            RegisterExchange();
+            RegisterStay();
+        }
     }
 
     private void Reveal_Enter()
@@ -123,6 +132,12 @@ public class Poker : GameMode
 
         uint pval = Hand.Evaluate(playersHand, _CurrentRules);
         uint dval = Hand.Evaluate(dealersHand, _CurrentRules);
+
+
+        _StateData.PlayersHandKey = Hand.DescriptionFromMask(playersHand);
+        _StateData.DealersHanKey = Hand.DescriptionFromMask(playersHand);
+
+        //Hand.HandTypes type = Hand.Hand
 
         if (pval == dval)
         {
@@ -152,7 +167,8 @@ public class Poker : GameMode
         {
             case PokerOutcome.Lose:
                 _EventManager.FireEvent(GameModeEvent.Lose.ToString());
-                SetOverlayText(_StateData.LoseText);
+                
+                SetOverlayText(_StateData.GetLoseText(_StateData.DealersHanKey));
                 break;
             case PokerOutcome.Win:
                 ResolveWin();
@@ -177,7 +193,7 @@ public class Poker : GameMode
     {
         int wins = _GameData.CurrentBet * _StateData.BetMulti;
         _GameData.AddWinnings(wins);
-        SetOverlayText(_StateData.GetCelebrationText(wins));
+        SetOverlayText(_StateData.GetCelebrationText(wins, _StateData.PlayersHandKey));
     }
 
     private void OnStaySelected()
@@ -190,6 +206,12 @@ public class Poker : GameMode
         _StateData.ExchangeCards.Clear();
 
         OnExchange();
+    }
+
+    private void DoAutoPlay()
+    {
+        
+        StateChange(PokerState.Reveal);
     }
 
     private void OnExchange()

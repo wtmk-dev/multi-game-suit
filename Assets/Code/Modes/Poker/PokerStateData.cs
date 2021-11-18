@@ -1,9 +1,10 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public class PokerStateData : Updatable
 {
     public PokerOutcome Outcome;
-
+    public string PlayersHandKey, DealersHanKey;
     public Timer IdelStateTimer;
     public readonly float IdelShowOverlayTime = 2600f;
 
@@ -21,16 +22,42 @@ public class PokerStateData : Updatable
     public readonly string OutcomeText = "SHOW";
     public readonly string PickStateText = "{vertexp}Click any cards you wish to exchange.\n Then click exchange.\nOr Click stay.";
     public readonly string TieText = "PUSH";
-    public readonly string LoseText = "<bounce>I. Just got lucky\nRun it back?<bounce>";
+
+    public string GetLoseText(string key)
+    {
+        string type = "I. Just got lucky";
+
+        try
+        {
+            type = _Translation.RussianToEnglish[key];
+        }
+        catch (KeyNotFoundException e)
+        {
+            Debug.Log(e.ToString());
+        }
+
+        return type + "\n<bounce> Run it back?< bounce >";
+    }
 
     public string GetTitleText(int size)
     {
         return $"{size} Card";
     }
 
-    public string GetCelebrationText(int totalWin)
+    public string GetCelebrationText(int totalWin, string key)
     {
-        return $"<rainb>Chicken Dinner!</rainb>\n<incr>\nTOTAL WIN ${totalWin}<incr>";
+        string type = "Winner!";
+
+        try
+        {
+            type = _Translation.RussianToEnglish[key];
+        }catch(KeyNotFoundException e)
+        {
+            Debug.Log(key);
+            //Debug.Log(e.ToString());
+        }
+
+        return $"{type}\n<incr>\nTOTAL WIN ${totalWin}<incr>";
     }
 
     public string GetDeal_EnterText(bool aceInHand, (int, int) score)
@@ -79,6 +106,8 @@ public class PokerStateData : Updatable
 
     private PokerDeck _Deck;
     private int _BetMulti;
+    private HoldemHandRussianToEnglish _Translation = new HoldemHandRussianToEnglish();
+
     public PokerStateData(PokerDeck deck)
     {
         _Deck = deck;
