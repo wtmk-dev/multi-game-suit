@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GameSelectMenu : MonoBehaviour
 {
-    public Button HighLow, Blackjack, Poker5;
+    public Button HighLow, Blackjack, Poker5, Poker7;
     public GameObject Frame, GridLayout;
 
     private EventManager _EventManager = EventManager.Instance;
@@ -74,6 +74,7 @@ public class GameSelectMenu : MonoBehaviour
         HighLow.onClick.AddListener(OnHighLow);
         Blackjack.onClick.AddListener(OnBlackjack);
         Poker5.onClick.AddListener(OnPoker5);
+        Poker7.onClick.AddListener(OnPoker7);
     }
 
     private void Unregister()
@@ -81,6 +82,7 @@ public class GameSelectMenu : MonoBehaviour
         HighLow.onClick.RemoveListener(OnHighLow);
         Blackjack.onClick.RemoveListener(OnBlackjack);
         Poker5.onClick.RemoveListener(OnPoker5);
+        Poker7.onClick.AddListener(OnPoker7);
     }
 
     private void SetActive(bool isActive)

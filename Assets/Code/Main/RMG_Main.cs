@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 // This class should be duplicated since everything in it will be customized per game
 public class RMG_Main : MonoBehaviour
 {

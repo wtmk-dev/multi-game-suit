@@ -2,20 +2,13 @@ using System.Collections.Generic;
 
 public class PokerStateData : Updatable
 {
-    public bool PlayerBust, DealerBust, PlayerWin, DealerWin;
-    public BlackjackSelection Selection;
+    public PokerOutcome Outcome;
 
     public Timer IdelStateTimer;
     public readonly float IdelShowOverlayTime = 2600f;
 
-    public Timer ResolveDealerTimer;
-    public readonly float ResolveDealerTime = 800f;
-
-    public Timer PickStateTimer;
-    public readonly float PickShowOverlayTime = 1800f;
-
-    public Timer BustTimer;
-    public readonly float BustTime = 1600f;
+    public Timer OutcomeStateTimer;
+    public readonly float OutcomeTime = 1600f;
 
     public Timer CelebrateStateTimer;
     public readonly float CelebrateShowOverlayTime = 2800f;
@@ -25,7 +18,10 @@ public class PokerStateData : Updatable
     public List<PokerCard> DealersHand, PlayersHand, ExchangeCards;
 
     public readonly string IdelStateText = "{vertexp}Poker\nPlease place your bet!{/vertexp}";
+    public readonly string OutcomeText = "SHOW";
+    public readonly string PickStateText = "{vertexp}Click any cards you wish to exchange.\n Then click exchange.\nOr Click stay.";
     public readonly string TieText = "PUSH";
+    public readonly string LoseText = "<bounce>I. Just got lucky\nRun it back?<bounce>";
 
     public string GetTitleText(int size)
     {
@@ -34,7 +30,7 @@ public class PokerStateData : Updatable
 
     public string GetCelebrationText(int totalWin)
     {
-        return $"<wiggle>WINNER!</wiggle>\n<incr>\nTOTAL WIN ${totalWin}<incr>";
+        return $"<rainb>Chicken Dinner!</rainb>\n<incr>\nTOTAL WIN ${totalWin}<incr>";
     }
 
     public string GetDeal_EnterText(bool aceInHand, (int, int) score)
@@ -54,9 +50,7 @@ public class PokerStateData : Updatable
     public void Update()
     {
         IdelStateTimer.Tick();
-        ResolveDealerTimer.Tick();
-        PickStateTimer.Tick();
-        BustTimer.Tick();
+        OutcomeStateTimer.Tick();
         CelebrateStateTimer.Tick();
     }
 
@@ -73,15 +67,7 @@ public class PokerStateData : Updatable
     public void Clear()
     {
         IdelStateTimer.Stop();
-        ResolveDealerTimer.Stop();
-        PickStateTimer.Stop();
-        BustTimer.Stop();
         CelebrateStateTimer.Stop();
-
-        PlayerBust = false;
-        DealerBust = false;
-        PlayerWin = false;
-        DealerWin = false;
 
         DealersHand.Clear();
         PlayersHand.Clear();
@@ -98,14 +84,18 @@ public class PokerStateData : Updatable
         _Deck = deck;
         _Deck.InitDeckFromCards();
         IdelStateTimer = new Timer(0f);
-        ResolveDealerTimer = new Timer(0f);
-        PickStateTimer = new Timer(0f);
-        BustTimer = new Timer(0f);
         CelebrateStateTimer = new Timer(0f);
-
+        OutcomeStateTimer = new Timer(0f);
         DealersHand = new List<PokerCard>();
         PlayersHand = new List<PokerCard>();
         ExchangeCards = new List<PokerCard>();
         _BetMulti = 1;
     }
+}
+
+public enum PokerOutcome
+{
+    Win,
+    Push,
+    Lose
 }

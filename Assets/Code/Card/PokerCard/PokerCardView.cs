@@ -29,10 +29,17 @@ public class PokerCardView : MonoBehaviour, ICardView, IPoolable
         gameObject.SetActive(isActive);
     }
 
+    public void SetHightlight(bool isActive)
+    {
+        _Highlight.gameObject.SetActive(isActive);
+    }
+
     private Image _Image;
     private RectTransform _RectTransform;
     private Animator _Animator;
     private Button _Select;
+    [SerializeField]
+    private Image _Highlight;
 
     void Awake()
     {
@@ -40,5 +47,7 @@ public class PokerCardView : MonoBehaviour, ICardView, IPoolable
         _RectTransform = GetComponent<RectTransform>();
         _Animator = GetComponent<Animator>();
         _Select = GetComponent<Button>();
+
+        SetHightlight(false);
     }
 }

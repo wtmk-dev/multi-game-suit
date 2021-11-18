@@ -76,10 +76,10 @@ public class RMG_GameScreen : State
         _HighLow.OnModeChange += GameModeChanged;
         _Blackjack = new Blackjack(_View.Blackjack, _Deck);
         _Blackjack.OnModeChange += GameModeChanged;
-        _FiveCard = new Poker(_View.Poker, _Deck, _GameModes.Poker5);
-        //_FiveCard.OnModeChange += GameModeChanged;
-        _SevenCard = new Poker(_View.Poker, _Deck, _GameModes.Poker7);
-        //_SevenCard.OnModeChange += GameModeChanged;
+        _FiveCard = new Poker(_View.Poker, _Deck, _GameModes.Poker5, 5);
+        _FiveCard.OnModeChange += GameModeChanged;
+        _SevenCard = new Poker(_View.Poker, _Deck, _GameModes.Poker7, 7);
+        _SevenCard.OnModeChange += GameModeChanged;
 
         IState[] gameStates = new IState[] { _HighLow, _Blackjack, _FiveCard, _SevenCard };
 

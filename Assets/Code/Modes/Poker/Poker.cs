@@ -1,24 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
+using HoldemHand;
 
-public class Poker : State
+public class Poker : GameMode
 {
     public override string Tag { get; protected set; }
     public override IStateView View { get { return _View; } }
 
-    public override void OnEnter() 
+    public override void OnEnter()
     {
+        RegisterGameScreenEvents();
         StateChange(PokerState.Init);
     }
 
-    public override void OnExit() 
-    { 
-    
+    public override void OnExit()
+    {
+        UnregisterStay();
+        UnregisterExchange();
+        UnregisterOnSelectedBets();
+        UnregisterGameScreenEvents();
+
+        ClearHand(_StateData.DealersHand);
+        ClearHand(_StateData.PlayersHand);
+
+        _View.SetActive(false);
+        _StateData.Clear();
+
+        _View.Exchange.gameObject.SetActive(false);
+        _View.Stay.gameObject.SetActive(false);
+
+        _Ready = false;
     }
 
-    public override bool OnUpdate() 
-    { 
-        return _Ready; 
+    public override bool OnUpdate()
+    {
+        _StateData.Update();
+        return _Ready;
     }
 
     private GameModeTag _GameModeTag = new GameModeTag();
@@ -30,31 +47,27 @@ public class Poker : State
     private PokerStateData _StateData;
     private PokerDeck _Deck;
     private PokerState _State;
-    private Dictionary<string, PokerValue> _RuleSets = new Dictionary<string, PokerValue>();
-    private PokerValue _CurrentRules;
+    private int _CurrentRules;
 
-    public Poker(PokerView view, PokerDeck deck, string tag)
+    public Poker(PokerView view, PokerDeck deck, string tag, int rules)
     {
         _View = view;
         Tag = tag;
         _Deck = deck;
         RegisterStateEnter();
-        
-        _RuleSets.Add(_GameModeTag.Poker5, new PokerFiveCardValue());
-        _RuleSets.Add(_GameModeTag.Poker7, new PokerFiveCardValue());
 
-        _CurrentRules = _RuleSets[tag];
+        _CurrentRules = rules;
     }
 
     private void Init_Enter()
     {
-        if(_StateData == null)
+        if (_StateData == null)
         {
             _StateData = new PokerStateData(_Deck);
         }
 
         _View.gameObject.SetActive(true);
-        _View.SetTitleText(_StateData.GetTitleText(_CurrentRules.HandSize));
+        _View.SetTitleText(_StateData.GetTitleText(_CurrentRules));
 
         InitBets();
         StateChange(PokerState.Idle);
@@ -85,21 +98,172 @@ public class Poker : State
 
     private void Pick_Enter()
     {
+        SetOverlayText(_StateData.PickStateText);
+        RevealHand(_StateData.PlayersHand);
+        RegisterHand(_StateData.PlayersHand);
         RegisterExchange();
         RegisterStay();
-        RevealHand(_StateData.PlayersHand);
+    }
+
+    private void Reveal_Enter()
+    {
+        RevealHand(_StateData.DealersHand);
+        StateChange(PokerState.Outcome);
+    }
+    
+    private void Outcome_Enter()
+    {
+        SetOverlayText(_StateData.OutcomeText);
+
+        _Debug.Log("Player's Hand : " + GetHoldemHand(_StateData.PlayersHand));
+        _Debug.Log("Dealer's Hand : " + GetHoldemHand(_StateData.DealersHand));
+
+        ulong playersHand = Hand.ParseHand(GetHoldemHand(_StateData.PlayersHand));
+        ulong dealersHand = Hand.ParseHand(GetHoldemHand(_StateData.DealersHand));
+
+        uint pval = Hand.Evaluate(playersHand, _CurrentRules);
+        uint dval = Hand.Evaluate(dealersHand, _CurrentRules);
+
+        if (pval == dval)
+        {
+            _StateData.Outcome = PokerOutcome.Push;
+        }
+        else if(pval < dval)
+        {
+            _StateData.Outcome = PokerOutcome.Lose;
+        }
+        else{
+            _StateData.Outcome = PokerOutcome.Win;
+        }
+
+        _StateData.OutcomeStateTimer.OnTimerComplete += Outcome_Complete;
+        _StateData.OutcomeStateTimer.Start(_StateData.OutcomeTime);
+    }
+
+    private void Outcome_Complete()
+    {
+        _StateData.OutcomeStateTimer.OnTimerComplete -= Outcome_Complete;
+        StateChange(PokerState.Celebrate);
+    }
+
+    private void Celebrate_Enter()
+    {
+        switch(_StateData.Outcome)
+        {
+            case PokerOutcome.Lose:
+                _EventManager.FireEvent(GameModeEvent.Lose.ToString());
+                SetOverlayText(_StateData.LoseText);
+                break;
+            case PokerOutcome.Win:
+                ResolveWin();
+                break;
+            case PokerOutcome.Push:
+                _GameData.Push();
+                SetOverlayText(_StateData.TieText);
+                break;
+        }
+
+        _StateData.CelebrateStateTimer.OnTimerComplete += Celebrate_Complete;
+        _StateData.CelebrateStateTimer.Start(_StateData.CelebrateShowOverlayTime);
+    }
+
+    private void Celebrate_Complete()
+    {
+        _StateData.CelebrateStateTimer.OnTimerComplete -= Celebrate_Complete;
+        StateChange(PokerState.Idle);
+    }
+
+    private void ResolveWin()
+    {
+        int wins = _GameData.CurrentBet * _StateData.BetMulti;
+        _GameData.AddWinnings(wins);
+        SetOverlayText(_StateData.GetCelebrationText(wins));
     }
 
     private void OnStaySelected()
     {
+        for (int i = 0; i < _StateData.PlayersHand.Count; i++)
+        {
+            _StateData.PlayersHand[i].View.SetHightlight(false);
+        }
 
+        _StateData.ExchangeCards.Clear();
+
+        OnExchange();
     }
 
-    private void OnExchange() 
+    private void OnExchange()
     {
+        UnregisterHand(_StateData.PlayersHand);
+        UnregisterStay();
+        UnregisterExchange();
+        UnregisterOnSelectedBets();
+
         for (int i = 0; i < _StateData.ExchangeCards.Count; i++)
         {
-            
+            PokerCard card = GetViewBoundCard();
+            _StateData.PlayersHand.Add(card);
+            AttachCardToGroupView(card, _View.PlayersHandGroup.transform);
+            card.SetState(PokerCardState.FaceUp);
+        }
+
+        for (int i = 0; i < _StateData.ExchangeCards.Count; i++)
+        {
+            if(_StateData.PlayersHand.Contains(_StateData.ExchangeCards[i]))
+            {
+                _StateData.PlayersHand.Remove(_StateData.ExchangeCards[i]);
+            }
+
+            _StateData.ExchangeCards[i].View.Kill();
+            _StateData.ExchangeCards[i].View.SetActive(false);
+        }
+
+        _StateData.ExchangeCards.Clear();
+        StateChange(PokerState.Reveal);
+    }
+
+    private string GetHoldemHand(List<PokerCard> hand)
+    {
+        string key = "";
+
+        for (int i = 0; i < hand.Count; i++)
+        {
+            key += hand[i].Model.GetHoldemHandKey() + " ";
+        }
+
+        key.Trim();
+        return key;
+    }
+
+    private void RegisterHand(List<PokerCard> hand) 
+    {
+        for (int i = 0; i < hand.Count; i++)
+        {
+            int index = i;
+            hand[i].View.Select.onClick.AddListener(()=>{OnCardInHandClicked(hand[index]);});
+        }
+    }
+    
+    private void UnregisterHand(List<PokerCard> hand)
+    {
+        for (int i = 0; i < hand.Count; i++)
+        {
+            hand[i].View.Select.onClick.RemoveAllListeners();
+        }
+    }
+
+    private void OnCardInHandClicked(PokerCard card)
+    {
+        _Debug.Log("card clicked");
+        if (_StateData.ExchangeCards.Contains(card))
+        {
+            card.View.SetHightlight(false);
+            _StateData.ExchangeCards.Remove(card);
+        }
+        else
+        {
+            card.View.SetHightlight(true);
+            _StateData.ExchangeCards.Add(card);
         }
     }
 
@@ -113,19 +277,21 @@ public class Poker : State
         _View.Exchange.onClick.AddListener(OnExchange);
     }
 
+    private void UnregisterStay()
+    {
+        _View.Stay.onClick.RemoveListener(OnStaySelected);
+    }
+
+    private void UnregisterExchange()
+    {
+        _View.Exchange.onClick.RemoveListener(OnExchange);
+    }
+
     private void RevealHand(List<PokerCard> hand)
     {
         for (int i = 0; i < hand.Count; i++)
         {
             hand[i].SetState(PokerCardState.FaceUp);
-        }
-    }
-
-    private void RegisterHandForPick(List<PokerCard> hand)
-    {
-        for (int i = 0; i < hand.Count; i++)
-        {
-            //
         }
     }
 
@@ -145,6 +311,9 @@ public class Poker : State
         _StateProcess.RegisterEnter(PokerState.Idle.ToString(), Idle_Enter);
         _StateProcess.RegisterEnter(PokerState.Deal.ToString(), Deal_Enter);
         _StateProcess.RegisterEnter(PokerState.Pick.ToString(), Pick_Enter);
+        _StateProcess.RegisterEnter(PokerState.Reveal.ToString(), Reveal_Enter);
+        _StateProcess.RegisterEnter(PokerState.Outcome.ToString(), Outcome_Enter);
+        _StateProcess.RegisterEnter(PokerState.Celebrate.ToString(), Celebrate_Enter);
     }
 
     private void StateChange(PokerState state, float waitTime = 0f)
@@ -239,7 +408,7 @@ public class Poker : State
 
     private void GetStartingHand(List<PokerCard> hand)
     {
-        while (hand.Count < _CurrentRules.HandSize)
+        while (hand.Count < _CurrentRules)
         {
             AddCardToHand(hand);
         }
@@ -258,6 +427,21 @@ public class Poker : State
         card.SetState(PokerCardState.FaceDown);
         return card;
     }
+
+    private void SetOverlayText(string text)
+    {
+        _View.OverlayText.SetActive(true);
+        _View.SetOverlayText(text);
+    }
+
+    protected override void OnGameSelect(string name, object data)
+    {
+        if (_State == PokerState.Idle)
+        {
+            _EventManager.FireEvent(MenuEvent.GameSelectMenuShow.ToString());
+        }
+    }
+
 }
 
 public enum PokerState
@@ -266,5 +450,8 @@ public enum PokerState
     Bet,
     Deal,
     Pick,
+    Reveal,
+    Outcome,
+    Celebrate,
     Idle
 }
