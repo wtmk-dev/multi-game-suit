@@ -100,11 +100,19 @@ public class HighLow : GameMode
         _View.OverlayText.SetActive(true);
         _View.SetOverlayText(_StateData.Deal_EnterText);
 
-        RegisterHigh();
-        RegisterLow();
-
-        //_StateData.DealStateTimer.OnTimerComplete += Deal_MessageHide;
-        //_StateData.DealStateTimer.Start(_StateData.DealShowOverlayTime);
+        if(_GameData.IsAutoPlay)
+        {
+            GetLowSelection();
+            _StateData.PickStateTimer.OnTimerComplete += Pick_Complete;
+            _StateData.PickStateTimer.Start(_StateData.PickShowOverlayTime);
+            _View.SetOverlayText(_StateData.OnSlectedText);
+        }
+        else
+        {
+            RegisterHigh();
+            RegisterLow();
+        }
+        
         //wait for player to take action
     }
 
@@ -364,6 +372,18 @@ public class HighLow : GameMode
         }
 
         return _StateData.Right;
+    }
+
+    private HighLowSelection GetLowSelection()
+    {
+        if(_StateData.Base.Model.Rank < PokerCardRank.Jack)
+        {
+            return HighLowSelection.Low;
+        }
+        else
+        {
+            return HighLowSelection.High;
+        }
     }
 
     private void ResolveWinner()
