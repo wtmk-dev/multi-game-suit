@@ -21,6 +21,7 @@ public class RMG_GameData
     public string CurrentGameMode { get { return _CurrentGameMode; } set { _CurrentGameMode = value; } }
     public int CurrentBet { get { return _CurrentBet; } set { _CurrentBet = value; } }
     public int BaseBet { get { return _BaseBet; } private set { _BaseBet = value; } }
+    public bool IsAutoPlay { get { return _IsAutoPlay; } }
 
     public void SetGameMode(string mode)
     {
@@ -63,13 +64,29 @@ public class RMG_GameData
         OnBetChanged?.Invoke(_CurrentBet);
     }
 
+    public void AddMoney(int money)
+    {
+        _Money += money;
+    }
+
+    public void SetBaseBet(int bet)
+    {
+        _BaseBet = bet;
+    }
+
+    public void SetAutoPlay(bool isAutoPlay)
+    {
+        _IsAutoPlay = isAutoPlay;
+    }
+
     private string _CurrentGameMode;
     private int _Money;
     private int _CurrentBet;
     private int _BaseBet;
+    public bool _IsAutoPlay;
     public RMG_GameData() 
     { 
-        _Money = 999;
+        _Money = 0;
         _CurrentBet = 0;
         _BaseBet = 5;
     }

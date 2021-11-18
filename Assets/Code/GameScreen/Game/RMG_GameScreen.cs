@@ -75,6 +75,11 @@ public class RMG_GameScreen : State
 
     private void StartGameMode()
     {
+        _GameData.AddMoney(999);
+        _GameData.SetBaseBet(5);
+        _View.AutoPlayActive.SetActive(_GameData.IsAutoPlay);
+
+        _EventManager.RegisterEventCallback(RMG_GameScreenEvent.AutoPlay.ToString(), OnAutoPlay);
         _ModeDirector.SetCurrentState(_GameData.CurrentGameMode);
         _ModeDirector.IsActive = true;
     }
@@ -117,11 +122,20 @@ public class RMG_GameScreen : State
         }
         return transforms;
     }
+
+    private void OnAutoPlay(string name, object data)
+    {
+        bool isAutoplay = !_GameData.IsAutoPlay;
+        _GameData.SetAutoPlay(isAutoplay);
+
+        _View.AutoPlayActive.SetActive(isAutoplay);
+    }
 }
 
 public enum RMG_GameScreenEvent
 {
     GameSelect,
     GameSelected,
-    GameSelectExit
+    GameSelectExit,
+    AutoPlay
 }
