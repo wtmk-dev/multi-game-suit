@@ -8,6 +8,7 @@ public class RMG_StartScreen : State
 
     public override void OnEnter()
     {
+        _EventManager.FireEvent(_AudioEvent.Play, _Audio);
         _View.SetActive(true);
         Register();
     }
@@ -19,16 +20,25 @@ public class RMG_StartScreen : State
         _View.SetActive(false);
     }
 
+    private EventManager _EventManager = EventManager.Instance;
     private GameScreenTags _ScreenTags = new GameScreenTags();
     private GameModeTag _GameMode = new GameModeTag(); 
     private RMG_GameData _GameData = RMG_GameData.Instance;
     private RMG_StartScreenView _View;
     private Dood _Debug = Dood.Instance;
+    private AudioEvent _AudioEvent = new AudioEvent();
+
+    private SoundManagerPlayArgs _Audio;
 
     public RMG_StartScreen(RMG_StartScreenView view)
     {
         _View = (RMG_StartScreenView)view;
         Tag = _ScreenTags.Start;
+
+        _Audio = new SoundManagerPlayArgs();
+        _Audio.Loop = true;
+        _Audio.Aclip = _View.StartScreenAudio;
+        _Audio.Volume = .02f;
     }
 
     private void Register()

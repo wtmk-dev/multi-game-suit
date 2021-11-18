@@ -17,6 +17,8 @@ public class RMG_Main : MonoBehaviour
     private CreditsScreenView _CreditScreenView;
     [SerializeField]
     private PokerDeckDefinition _DeckDefinition;
+    [SerializeField]
+    private List<AudioSource> _AudioSources;
  
     // Game screens
     private RMG_StartScreen _StartScreen;
@@ -29,11 +31,12 @@ public class RMG_Main : MonoBehaviour
     private GameScreenTags _ScreenStates = new GameScreenTags();
     private Dood _Dood = Dood.Instance;
     private PokerDeck _Deck;
+    private SoundManager _SoundManager;
 
     private void Awake()
     {
+        _SoundManager = new SoundManager(_AudioSources);
         _Deck = _DeckFactory.Build_DeckFromDefinition(_DeckDefinition);
-        InitGameScreens(BuildGameScreens());
     }
 
     private void Start()
@@ -41,6 +44,7 @@ public class RMG_Main : MonoBehaviour
 #if UNITY_EDITOR
         Dood.IsLogging = true;
 #endif
+        InitGameScreens(BuildGameScreens());
         GameStart();
     }
 

@@ -8,6 +8,7 @@ public class RMG_GameScreen : State
 
     public override void OnEnter()
     {
+        _EventManager.FireEvent(_AudioEvent.Play, _Audio);
         _View.SetActive(true);
         RegisterGameSelect();
         StartGameMode();
@@ -33,6 +34,9 @@ public class RMG_GameScreen : State
     private StateDirector _ModeDirector;
     private IState[] _Modes = new IState[4]; //High Low , Blackjack, Poker 5, Poker 7
     private GameModeTag _GameModes = new GameModeTag();
+    private AudioEvent _AudioEvent = new AudioEvent();
+
+    private SoundManagerPlayArgs _Audio;
 
     public RMG_GameScreen(RMG_GameScreenView view, PokerDeck deck)
     {
@@ -41,6 +45,11 @@ public class RMG_GameScreen : State
         _Deck = deck;
 
         InitModes(BuildModes());
+
+        _Audio = new SoundManagerPlayArgs();
+        _Audio.Loop = true;
+        _Audio.Aclip = _View.GameScreenAudio;
+        _Audio.Volume = .05f;
     }
 
     private void RegisterGameSelect()

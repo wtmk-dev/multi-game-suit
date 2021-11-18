@@ -11,6 +11,7 @@ public class RMG_GameScreenView : StateView
     public HighLowView HighLow;
     public Button GameSelect;
     public List<GameObject> Bets;
+    public AudioClip GameScreenAudio;
 
     [SerializeField]
     private Canvas _UI;
