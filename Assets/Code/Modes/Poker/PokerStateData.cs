@@ -36,7 +36,7 @@ public class PokerStateData : Updatable
             Debug.Log(e.ToString());
         }
 
-        return type + "\n<bounce> Run it back?< bounce >";
+        return "I got\n" + type + "\n<bounce> Run it back?</bounce>";
     }
 
     public string GetTitleText(int size)
@@ -54,10 +54,9 @@ public class PokerStateData : Updatable
         }catch(KeyNotFoundException e)
         {
             Debug.Log(key);
-            //Debug.Log(e.ToString());
         }
 
-        return $"{type}\n<incr>\nTOTAL WIN ${totalWin}<incr>";
+        return $"You got\n{type}\n<incr>\nTOTAL WIN ${totalWin}</incr>";
     }
 
     public string GetDeal_EnterText(bool aceInHand, (int, int) score)

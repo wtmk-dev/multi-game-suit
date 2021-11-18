@@ -59,28 +59,28 @@ public class RMG_StartScreen : State
 
     private void HighLowSelected() 
     {
-        _Debug.Log("HighLowSelected");
+        //_Debug.Log("HighLowSelected");
         _GameData.SetGameMode(_GameMode.HighLow);
         StateChange();
     }
 
     private void BlackjackSelected() 
     {
-        _Debug.Log("BlackjackSelected");
+        //_Debug.Log("BlackjackSelected");
         _GameData.SetGameMode(_GameMode.Blackjack);
         StateChange();
     }
 
     private void FiveCardSelected() 
     {
-        _Debug.Log("FiveCardSelected");
+        //_Debug.Log("FiveCardSelected");
         _GameData.SetGameMode(_GameMode.Poker5);
         StateChange();
     }
 
     private void SevenCardSelected() 
     {
-        _Debug.Log("SevenCardSelected");
+        //_Debug.Log("SevenCardSelected");
         _GameData.SetGameMode(_GameMode.Poker7);
         StateChange();
     }

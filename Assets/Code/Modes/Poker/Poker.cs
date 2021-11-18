@@ -124,8 +124,8 @@ public class Poker : GameMode
     {
         SetOverlayText(_StateData.OutcomeText);
 
-        _Debug.Log("Player's Hand : " + GetHoldemHand(_StateData.PlayersHand));
-        _Debug.Log("Dealer's Hand : " + GetHoldemHand(_StateData.DealersHand));
+        //_Debug.Log("Player's Hand : " + GetHoldemHand(_StateData.PlayersHand));
+        //_Debug.Log("Dealer's Hand : " + GetHoldemHand(_StateData.DealersHand));
 
         ulong playersHand = Hand.ParseHand(GetHoldemHand(_StateData.PlayersHand));
         ulong dealersHand = Hand.ParseHand(GetHoldemHand(_StateData.DealersHand));
@@ -135,10 +135,8 @@ public class Poker : GameMode
 
 
         _StateData.PlayersHandKey = Hand.DescriptionFromMask(playersHand);
-        _StateData.DealersHanKey = Hand.DescriptionFromMask(playersHand);
-
-        //Hand.HandTypes type = Hand.Hand
-
+        _StateData.DealersHanKey = Hand.DescriptionFromMask(dealersHand);
+        
         if (pval == dval)
         {
             _StateData.Outcome = PokerOutcome.Push;
@@ -276,7 +274,6 @@ public class Poker : GameMode
 
     private void OnCardInHandClicked(PokerCard card)
     {
-        _Debug.Log("card clicked");
         if (_StateData.ExchangeCards.Contains(card))
         {
             card.View.SetHightlight(false);
@@ -403,7 +400,7 @@ public class Poker : GameMode
 
     private void DealCards()
     {
-        _Debug.Log("DealCards");
+        //_Debug.Log("DealCards");
 
         GetStartingHand(_StateData.DealersHand);
         GetStartingHand(_StateData.PlayersHand);
