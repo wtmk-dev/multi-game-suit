@@ -56,7 +56,7 @@ public class PokerStateData : Updatable
             Debug.Log(key);
         }
 
-        return $"You got\n{type}\n<incr>\nTOTAL WIN ${totalWin}</incr>";
+        return $"You got\n{type}\n<incr>TOTAL WIN ${totalWin}</incr>";
     }
 
     public string GetDeal_EnterText(bool aceInHand, (int, int) score)

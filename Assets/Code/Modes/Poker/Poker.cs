@@ -48,6 +48,7 @@ public class Poker : GameMode
     private PokerDeck _Deck;
     private PokerState _State;
     private int _CurrentRules;
+    private AudioEvent _AudioEvent = new AudioEvent();
 
     public Poker(PokerView view, PokerDeck deck, string tag, int rules)
     {
@@ -192,6 +193,7 @@ public class Poker : GameMode
         int wins = _GameData.CurrentBet * _StateData.BetMulti;
         _GameData.AddWinnings(wins);
         SetOverlayText(_StateData.GetCelebrationText(wins, _StateData.PlayersHandKey));
+        _EventManager.FireEvent(_AudioEvent.Play, _View.WinTune);
     }
 
     private void OnStaySelected()

@@ -33,6 +33,7 @@ public class HighLow : GameMode
     }
 
     private EventManager _EventManager = EventManager.Instance;
+    private AudioEvent _AudioEvent = new AudioEvent();
     private Dood _Debug = Dood.Instance;
     private HighLowView _View;
 
@@ -223,6 +224,7 @@ public class HighLow : GameMode
             _GameData.AddWinnings(totalWin);
 
             SetCardState(_StateData.Base, PokerCardState.FaceDown);
+            _EventManager.FireEvent(_AudioEvent.Play, _View.WinTune);
         }
         else
         {

@@ -39,6 +39,7 @@ public class Blackjack : GameMode
     }
 
     private EventManager _EventManager = EventManager.Instance;
+    private AudioEvent _AudioEvent = new AudioEvent();
     private Dood _Debug = Dood.Instance;
     private BlackjackView _View;
     private GameModeTag _GameModeTag = new GameModeTag();
@@ -561,6 +562,7 @@ public class Blackjack : GameMode
         int wins = _GameData.CurrentBet * _StateData.BetMulti;
         _GameData.AddWinnings(wins);
         SetOverlayText(_StateData.GetCelebrationText(wins));
+        _EventManager.FireEvent(_AudioEvent.Play, _View.WinTune);
     }
 
     private void Celebrate_Complete()

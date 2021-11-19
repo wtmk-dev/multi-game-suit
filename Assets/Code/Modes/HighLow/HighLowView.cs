@@ -12,7 +12,8 @@ public class HighLowView : StateView
     public List<BetController> Bets;
     public GameObject OverlayText;
     public GameObject GameSelectGrid;
-  
+    public SoundManagerPlayArgs WinTune;
+
     public override void SetActive(bool isActive)
     {
         base.SetActive(isActive);

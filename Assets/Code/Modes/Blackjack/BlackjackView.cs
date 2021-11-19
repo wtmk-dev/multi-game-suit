@@ -11,6 +11,7 @@ public class BlackjackView : StateView
     public List<BetController> Bets;
     public GameObject OverlayText;
     public GameObject GameSelectGrid;
+    public SoundManagerPlayArgs WinTune;
 
     public void SetOverlayText(string text)
     {

@@ -10,6 +10,7 @@ public class PokerView : StateView
     public List<BetController> Bets;
     public GameObject OverlayText;
     public Button Exchange, Stay;
+    public SoundManagerPlayArgs WinTune;
 
     public virtual void SetOverlayText(string text)
     {
