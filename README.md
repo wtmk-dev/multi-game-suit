@@ -1,12 +1,9 @@
-# multi-game-suit
+# Beat the dealer 52 card game
 Games using poker cards
 Built as an example for potential employers to review, And submitted for git-hub game off 2021
 
 # Game Link
 https://wtmk-bk.itch.io/multi-card-game 
-
-# TO:DO
-Auto play, Sound, Effects
 
 # Art Used
 https://gatoparty.itch.io/ruby-gold-ui-pack
@@ -17,6 +14,3 @@ Jasn Painter
 https://github.com/wtmk-dev/wtmk_ToolKit
 https://www.textanimator.febucci.com/
 https://www.nuget.org/packages/HandEvaluator/
-
-# Trello
-https://trello.com/b/lPQOWaZQ/riccos-multi-game-suite
