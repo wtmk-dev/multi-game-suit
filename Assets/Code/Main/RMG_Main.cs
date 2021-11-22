@@ -14,7 +14,7 @@ public class RMG_Main : MonoBehaviour
     [SerializeField]
     private HelpScreenView _HelpScreenView;
     [SerializeField]
-    private CreditsScreenView _CreditScreenView;
+    private RMG_CreditsView _CreditScreenView;
     [SerializeField]
     private PokerDeckDefinition _DeckDefinition;
     [SerializeField]
@@ -24,7 +24,7 @@ public class RMG_Main : MonoBehaviour
     private RMG_StartScreen _StartScreen;
     private RMG_GameScreen _GameScreen;
     private HelpScreen _HelpScreen;
-    private CreditsScreen _CreditsScreen;
+    private RMG_CreditsScreen _CreditsScreen;
 
     private PokerDeckFactory _DeckFactory = new PokerDeckFactory();
     private StateDirector _GameScreenDirector;
@@ -58,7 +58,7 @@ public class RMG_Main : MonoBehaviour
         _StartScreen = new RMG_StartScreen(_StartScreenView);
         _GameScreen = new RMG_GameScreen(_GameScreenView, _Deck);
         _HelpScreen = new HelpScreen(_HelpScreenView);
-        _CreditsScreen = new CreditsScreen(_CreditScreenView);
+        _CreditsScreen = new RMG_CreditsScreen(_CreditScreenView);
 
         _StartScreen.ValidTransitions = new string[] { _GameScreen.Tag, _HelpScreen.Tag, _CreditsScreen.Tag };
         _GameScreen.ValidTransitions = new string[] { _StartScreen.Tag, _HelpScreen.Tag, _CreditsScreen.Tag };

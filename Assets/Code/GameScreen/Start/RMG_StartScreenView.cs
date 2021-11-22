@@ -6,6 +6,9 @@ using Febucci.UI;
 
 public class RMG_StartScreenView : StateView
 {
-    public Button HighLowButton, BlackjackButton, FiveCardButton, SevenCardButton;
+    public Button HighLowButton, BlackjackButton, 
+                  FiveCardButton, SevenCardButton,
+                  CreditsButton;
+
     public AudioClip StartScreenAudio;
 }

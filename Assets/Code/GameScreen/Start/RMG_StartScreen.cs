@@ -20,6 +20,7 @@ public class RMG_StartScreen : State
         _View.SetActive(false);
     }
 
+    private GameScreenTags _GameScreenTag = new GameScreenTags();
     private EventManager _EventManager = EventManager.Instance;
     private GameScreenTags _ScreenTags = new GameScreenTags();
     private GameModeTag _GameMode = new GameModeTag(); 
@@ -47,6 +48,7 @@ public class RMG_StartScreen : State
         _View.BlackjackButton.onClick.AddListener(BlackjackSelected);
         _View.FiveCardButton.onClick.AddListener(FiveCardSelected);
         _View.SevenCardButton.onClick.AddListener(SevenCardSelected);
+        _View.CreditsButton.onClick.AddListener(CreditsSelected);
     }
 
     private void Unregister()
@@ -57,37 +59,40 @@ public class RMG_StartScreen : State
         _View.SevenCardButton.onClick.RemoveListener(SevenCardSelected);
     }
 
+    private void CreditsSelected()
+    {
+        StateChange(_GameScreenTag.Credits);
+    }
+
     private void HighLowSelected() 
     {
-        //_Debug.Log("HighLowSelected");
-        _GameData.SetGameMode(_GameMode.HighLow);
-        StateChange();
+        SelectGameMode(_GameMode.HighLow);
     }
 
     private void BlackjackSelected() 
     {
-        //_Debug.Log("BlackjackSelected");
-        _GameData.SetGameMode(_GameMode.Blackjack);
-        StateChange();
+        SelectGameMode(_GameMode.Blackjack);
     }
 
     private void FiveCardSelected() 
     {
-        //_Debug.Log("FiveCardSelected");
-        _GameData.SetGameMode(_GameMode.Poker5);
-        StateChange();
+        SelectGameMode(_GameMode.Poker5);
     }
 
     private void SevenCardSelected() 
     {
-        //_Debug.Log("SevenCardSelected");
-        _GameData.SetGameMode(_GameMode.Poker7);
-        StateChange();
+        SelectGameMode(_GameMode.Poker7);
     }
 
-    private void StateChange()
+    private void SelectGameMode(string mode)
     {
-        NextState = _ScreenTags.Game;
+        _GameData.SetGameMode(mode);
+        StateChange(_GameScreenTag.Game);
+    }
+
+    private void StateChange(string state)
+    {
+        NextState = state;
         _Ready = true;
     }
 }
