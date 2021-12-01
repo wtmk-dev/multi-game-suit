@@ -33,7 +33,7 @@ public class PokerStateData : Updatable
         }
         catch (KeyNotFoundException e)
         {
-            Debug.Log(e.ToString());
+            Debug.Log($"{key} - Not not translated");
         }
 
         return "I got\n" + type + "\n<bounce> Run it back?</bounce>";
